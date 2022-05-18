@@ -7,7 +7,16 @@ import { Alert } from "@mui/material";
 import { post } from "../../utils/ApiCaller";
 import LocalStorageUtils from "../../utils/LocalStorageUtils";
 import Pagination from "../Pagination";
-import { CircularProgress, TextField, Button, Backdrop, Box, Modal, Fade, Typography } from "@mui/material";
+import {
+  CircularProgress,
+  TextField,
+  Button,
+  Backdrop,
+  Box,
+  Modal,
+  Fade,
+  Typography,
+} from "@mui/material";
 import MultipleSelectCheckmarks from "./MultipleSelectCheckmarks";
 import { Navigate } from "react-router-dom";
 
@@ -55,7 +64,7 @@ const CourseCreate = (props) => {
       .then(() => setIsLoading(false));
   }, []);
   if (LocalStorageUtils.getUser() === null) {
-    return <Navigate to="/form-login"></Navigate>;
+    return <Navigate to="/login"></Navigate>;
   }
   if (!LocalStorageUtils.getUser().isAdmin) {
     return <div className="ml-2 mt-2">You are not a tutor!</div>;
@@ -80,7 +89,11 @@ const CourseCreate = (props) => {
       overflow: "hidden",
       borderRadius: 4,
       backgroundColor: theme.palette.mode === "light" ? "#fcfcfb" : "#2b2b2b",
-      transition: theme.transitions.create(["border-color", "background-color", "box-shadow"]),
+      transition: theme.transitions.create([
+        "border-color",
+        "background-color",
+        "box-shadow",
+      ]),
       "&:hover": {
         backgroundColor: "transparent",
       },
@@ -95,7 +108,12 @@ const CourseCreate = (props) => {
     <>
       <div className="title m-1 mt-4 mb-4">
         Created Courses
-        <Button className="addbutton ml-3" variant="contained" component="span" onClick={handleOpen}>
+        <Button
+          className="addbutton ml-3"
+          variant="contained"
+          component="span"
+          onClick={handleOpen}
+        >
           <i className="bi bi-plus-lg"></i>
         </Button>
         <Modal
@@ -110,10 +128,20 @@ const CourseCreate = (props) => {
         >
           <Fade in={open}>
             <Box sx={style}>
-              <Typography id="transition-modal-title" variant="h6" component="h2">
+              <Typography
+                id="transition-modal-title"
+                variant="h6"
+                component="h2"
+              >
                 Enter Courses Detail
               </Typography>
-              <RedditTextField label="bookName" id="name" variant="filled" style={{ marginTop: 11, width: 300 }} inputRef={bookName} />
+              <RedditTextField
+                label="bookName"
+                id="name"
+                variant="filled"
+                style={{ marginTop: 11, width: 300 }}
+                inputRef={bookName}
+              />
               <RedditTextField
                 label="Fee (VND)"
                 id="fee"
@@ -122,7 +150,13 @@ const CourseCreate = (props) => {
                 style={{ marginTop: 11, marginLeft: 10, width: 200 }}
                 inputRef={bookFee}
               />
-              <RedditTextField label="Description" id="name" variant="filled" style={{ marginTop: 11, width: 300 }} inputRef={bookDescription} />
+              <RedditTextField
+                label="Description"
+                id="name"
+                variant="filled"
+                style={{ marginTop: 11, width: 300 }}
+                inputRef={bookDescription}
+              />
               <RedditTextField
                 label="Image Url"
                 id="fee"
@@ -140,7 +174,10 @@ const CourseCreate = (props) => {
               />
               <br />
               <div className="alertlog" style={{ display: "none" }}>
-                <Alert severity="error" style={{ marginTop: 11, marginLeft: 10, width: 510 }}>
+                <Alert
+                  severity="error"
+                  style={{ marginTop: 11, marginLeft: 10, width: 510 }}
+                >
                   {errMessage}
                 </Alert>
               </div>
@@ -154,7 +191,12 @@ const CourseCreate = (props) => {
               >
                 Create
               </Button>
-              <Button className="ml-3 mt-3" variant="contained" onClick={handleClose} style={{ marginTop: 11, marginLeft: 100, width: 100 }}>
+              <Button
+                className="ml-3 mt-3"
+                variant="contained"
+                onClick={handleClose}
+                style={{ marginTop: 11, marginLeft: 100, width: 100 }}
+              >
                 Cancel
               </Button>
             </Box>
@@ -169,7 +211,9 @@ const CourseCreate = (props) => {
           ))}
         ></Pagination>
       )}
-      {!isLoading && dataContent.length === 0 && <div className="ml-2">You haven't created any course yet</div>}
+      {!isLoading && dataContent.length === 0 && (
+        <div className="ml-2">You haven't created any course yet</div>
+      )}
       {isLoading && <CircularProgress />}
     </>
   );

@@ -30,18 +30,20 @@ function AccountManagemnt() {
   }, []);
 
   if (LocalStorageUtils.getUser() === null) {
-    return <Navigate to="/form-login" />;
+    return <Navigate to="/login" />;
   }
   const handlePayIn = (req) => {
     LocalStorageUtils.getToken();
     const user = LocalStorageUtils.getUser();
     const amount = document.querySelector("#amount").value;
-    put("/api/user/top-up", { username: user?.username, amount: amount }).then((res) => {
-      alert(res.data.message);
-      user.balance += parseInt(amount);
-      LocalStorageUtils.setUser(user);
-      console.log("amount", amount);
-    });
+    put("/api/user/top-up", { username: user?.username, amount: amount }).then(
+      (res) => {
+        alert(res.data.message);
+        user.balance += parseInt(amount);
+        LocalStorageUtils.setUser(user);
+        console.log("amount", amount);
+      }
+    );
   };
   const logOut = () => {
     LocalStorageUtils.clear();
@@ -82,9 +84,17 @@ function AccountManagemnt() {
             <form className="mt-4 topup-wrapper">
               <div className="form-group">
                 <label for="amount">Top Up Here</label>
-                <input type="number" className="form-control mt-2" id="amount" />
+                <input
+                  type="number"
+                  className="form-control mt-2"
+                  id="amount"
+                />
               </div>
-              <button type="button" className="btn btn-primary mt-4 ml-2" onClick={handlePayIn}>
+              <button
+                type="button"
+                className="btn btn-primary mt-4 ml-2"
+                onClick={handlePayIn}
+              >
                 Submit
               </button>
             </form>
@@ -100,7 +110,10 @@ function AccountManagemnt() {
           <div className="col-lg-12">
             <div className="account-info-wrapper mb-4">
               <h3 className="account-heading">Account</h3>
-              <button className="sign-out-link btn-sm btn-primary" onClick={logOut}>
+              <button
+                className="sign-out-link btn-sm btn-primary"
+                onClick={logOut}
+              >
                 Sign Out
               </button>
             </div>
@@ -111,7 +124,10 @@ function AccountManagemnt() {
           <div className="col-lg-12">
             <div className="account-password-container mb-4 mt-4">
               <h3 className="account-password-heading">Hi, {username}</h3>
-              <a className="account-management-link btn btn-primary btn-sm" href="/#/form-edit">
+              <a
+                className="account-management-link btn btn-primary btn-sm"
+                href="/#/form-edit"
+              >
                 AccountManagemnt
               </a>
             </div>

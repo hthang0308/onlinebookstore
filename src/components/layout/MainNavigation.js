@@ -42,7 +42,7 @@ const MainNavigation = () => {
                 <>
                   <li className="nav-item">
                     <Link
-                      to="/form-signuptologin"
+                      to="/signup"
                       className="nav-link active"
                       aria-current="page"
                     >
@@ -51,7 +51,7 @@ const MainNavigation = () => {
                   </li>
                   <li className="nav-item">
                     <Link
-                      to="/form-login"
+                      to="/login"
                       className="nav-link active"
                       aria-current="page"
                     >

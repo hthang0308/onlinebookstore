@@ -67,10 +67,12 @@ function CourseDetail() {
       const user = LocalStorageUtils.getUser();
       console.log(user);
       if (user != null)
-        get("/api/purchasing/my-purchase?username=" + user.username).then((res) => {
-          setListEnrolledCourse(res.data.content.filter((x) => x != null));
-          console.log(listEnrolledCourses);
-        });
+        get("/api/purchasing/my-purchase?username=" + user.username).then(
+          (res) => {
+            setListEnrolledCourse(res.data.content.filter((x) => x != null));
+            console.log(listEnrolledCourses);
+          }
+        );
     });
     // Get Role tương ứng
     getRole();
@@ -133,7 +135,7 @@ function CourseDetail() {
     const user = LocalStorageUtils.getUser();
     if (user == null) {
       alert("Bạn chưa đăng ký/đăng nhập");
-      <Navigate to="/form-login"></Navigate>;
+      <Navigate to="/login"></Navigate>;
     } else {
       // post("/api/courses/new-meeting", { slug: slug })
       // .then((res) => {
@@ -162,7 +164,7 @@ function CourseDetail() {
 
     if (user == null) {
       alert("Chưa đăng nhập, xin mời bạn đăng nhập");
-      <Navigate to="/form-login" />;
+      <Navigate to="/login" />;
     } else {
       post("/api/purchasing/purchase", {
         book: courseID,
@@ -178,7 +180,10 @@ function CourseDetail() {
           document.querySelector(".rating-button").style.display = "block";
         })
         .catch((err) => {
-          if (err.response.data.message === "User have already enrolled this course") {
+          if (
+            err.response.data.message ===
+            "User have already enrolled this course"
+          ) {
             document.querySelector(".enroll-button").style.display = "none";
             document.querySelector(".joining-button").style.display = "block";
             document.querySelector(".rating-button").style.display = "block";
@@ -190,7 +195,7 @@ function CourseDetail() {
   const joiningCourse = () => {
     const user = LocalStorageUtils.getUser();
     if (user == null) {
-      <Navigate to="/form-login" />;
+      <Navigate to="/login" />;
       alert("Chưa đăng nhập, xin mời bạn đăng nhập");
     } else {
       // post("/api/courses/new-meeting", { slug: slug })
@@ -231,13 +236,17 @@ function CourseDetail() {
       .then((res) => {
         var i = 0;
         while (i < res.data.content.filter((x) => x != null).length) {
-          if (courseName === res.data.content.filter((x) => x != null)[i].courseName) {
+          if (
+            courseName ===
+            res.data.content.filter((x) => x != null)[i].courseName
+          ) {
             formRatingElement.style.display = "block";
             break;
           }
           i++;
         }
-        if (i == res.data.content.filter((x) => x != null).length) alert("User cannot rate this course");
+        if (i == res.data.content.filter((x) => x != null).length)
+          alert("User cannot rate this course");
       })
       .catch((err) => console.log(err.response));
   };
@@ -287,13 +296,22 @@ function CourseDetail() {
                   <div className="card-body">
                     <h4 className="card-title">{courseName}</h4>
                     <p className="card-text">{description}</p>
-                    <div className="enroll-button btn-primary mt-4" onClick={enrollCourse}>
+                    <div
+                      className="enroll-button btn-primary mt-4"
+                      onClick={enrollCourse}
+                    >
                       Enroll
                     </div>
-                    <div className="joining-button btn-outline-primary mt-2" onClick={joiningCourse}>
+                    <div
+                      className="joining-button btn-outline-primary mt-2"
+                      onClick={joiningCourse}
+                    >
                       Joining
                     </div>
-                    <div className="rating-button btn-light mt-2" onClick={displayRatingCourse}>
+                    <div
+                      className="rating-button btn-light mt-2"
+                      onClick={displayRatingCourse}
+                    >
                       Rating
                     </div>
                   </div>
@@ -309,8 +327,19 @@ function CourseDetail() {
                   <form className="form-rating ml-4 mt-3">
                     <p>Please input your rating: (1-5)</p>
                     <div className="form-group">
-                      <input type="number" className="form-control mb-2 mt-2" id="star" min="1" max="5" />
-                      <input type="button" value="Submit" className="btn btn-primary" onClick={rateCourse} />
+                      <input
+                        type="number"
+                        className="form-control mb-2 mt-2"
+                        id="star"
+                        min="1"
+                        max="5"
+                      />
+                      <input
+                        type="button"
+                        value="Submit"
+                        className="btn btn-primary"
+                        onClick={rateCourse}
+                      />
                     </div>
                   </form>
                 </div>
@@ -350,20 +379,41 @@ function CourseDetail() {
                   <div className="course-info-wrapper">
                     <div class="form-group edit-wrapper">
                       <label for="couseName">Course Name</label>
-                      <input type="text" class="form-control course-edit-item" id="courseName" defaultValue={courseName} />
+                      <input
+                        type="text"
+                        class="form-control course-edit-item"
+                        id="courseName"
+                        defaultValue={courseName}
+                      />
                     </div>
                     <div class="form-group edit-wrapper">
                       <label for="description">Course Description</label>
-                      <input type="text" class="form-control course-edit-item" id="description" defaultValue={description} />
+                      <input
+                        type="text"
+                        class="form-control course-edit-item"
+                        id="description"
+                        defaultValue={description}
+                      />
                     </div>
                     <div class="form-group edit-wrapper">
                       <label for="description">Fee</label>
-                      <input type="number" class="form-control course-edit-item" id="fee" defaultValue={fee} />
+                      <input
+                        type="number"
+                        class="form-control course-edit-item"
+                        id="fee"
+                        defaultValue={fee}
+                      />
                     </div>
-                    <div class="form-group edit-wrapper btn btn-primary save-button" onClick={editCourseInfo}>
+                    <div
+                      class="form-group edit-wrapper btn btn-primary save-button"
+                      onClick={editCourseInfo}
+                    >
                       Save
                     </div>
-                    <div class="form-group edit-wrapper btn btn-light btn-outline-dark cancel-button" onClick={cancelButton}>
+                    <div
+                      class="form-group edit-wrapper btn btn-light btn-outline-dark cancel-button"
+                      onClick={cancelButton}
+                    >
                       Cancel
                     </div>
                   </div>

@@ -8,9 +8,7 @@ function Home() {
         <div className="row">
           <div className="col lg-3">
             <div className="content__left-side-wrapper">
-              <p className="content__left-side-description">
-                LEARN ENGLISH ANYWHERE, ANYTIME
-              </p>
+              <p className="content__left-side-description">ONLINE BOOKSTORE</p>
               <div className="content__left-side-btn-wrapper">
                 <a
                   className="content__left-side-btn btn btn-primary"
