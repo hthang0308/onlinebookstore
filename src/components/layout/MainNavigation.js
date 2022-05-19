@@ -46,6 +46,15 @@ const MainNavigation = () => {
                   Your Book
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link
+                  to="/create-book"
+                  className="nav-link active"
+                  aria-current="page"
+                >
+                  Add New Book
+                </Link>
+              </li>
             </ul>
             <ul className="navbar-nav ml-auto mb-lg-0">
               {user === null ? (

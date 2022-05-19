@@ -5,23 +5,14 @@ import LocalStorageUtils from "../../utils/LocalStorageUtils";
 import { Navigate, useParams, useRouteMatch } from "react-router-dom";
 
 function CourseDetail() {
-  const [courseName, setCourseName] = useState("");
+  const [bookName, setBookName] = useState("");
   const [description, setDescription] = useState("");
   const [picture, setPicture] = useState("");
-  // const [timeStart, setTimeStart] = useState("");
-  // const [timeEnd, setTimeEnd] = useState("");
-  // const [startingDate, setStartingDate] = useState("");
-  // const [endingDate, setEndingDate] = useState("");
-  const [Price, setPrice] = useState("");
-  // const [tutor, setTutor] = useState("");
-  // const [zoomLink, setZoomLink] = useState("");
-  // const [zoomHostLink, setZoomHostLink] = useState("");
-  // const [listDay, setListDay] = useState([]);
+  const [price, setPrice] = useState("");
   const [slug, setSlug] = useState("");
 
-  // Set role cho học sinh và giáo viên
+  // Role
   const [isAdmin, setIsAdmin] = useState("");
-  // const [star, setStar] = useState("");
 
   const { bookID } = useParams();
   const getRole = async () => {
@@ -33,35 +24,19 @@ function CourseDetail() {
   useEffect(() => {
     // Get Course Detail
     get("/api/book/detail?book=" + bookID).then((res) => {
-      const courseName = res.data.content.courseName;
+      const bookName = res.data.content.bookName;
       const description = res.data.content.description;
       let picture = res.data.content.picture;
       if (picture === "#")
         picture =
           "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/NASA-HS201427a-HubbleUltraDeepField2014-20140603.jpg/1200px-NASA-HS201427a-HubbleUltraDeepField2014-20140603.jpg";
       setPicture(picture);
-      // const timeStart = res.data.content.time.starting;
-      // const timeEnd = res.data.content.time.ending;
-      // const startingDate = res.data.content.startingDate;
-      // const endingDate = res.data.content.endingDate;
-      const Price = res.data.content.Price;
-      //const tutor = res.data.content.tutor;
-      // const listDay = res.data.content.day;
-      // const listRating = res.data.content.rating;
-      // const zoomLink = res.data.content.zoomLink;
-      // const zoomHostLink = res.data.content.zoomHostLink;
+      const price = res.data.content.price;
       const slug = res.data.content.slug;
-      setCourseName(courseName);
+      setBookName(bookName);
       setDescription(description);
       setPicture(picture);
-      // setTimeStart(timeStart);
-      // setTimeEnd(timeEnd);
-      // setStartingDate(startingDate);
-      // setEndingDate(endingDate);
-      setPrice(Price);
-      // setTutor(tutor);
-      // setListDay(listDay);
-      // setZoomLink(zoomLink);
+      setPrice(price);
       setSlug(slug);
 
       const user = LocalStorageUtils.getUser();
@@ -74,38 +49,22 @@ function CourseDetail() {
           }
         );
     });
-    // Get Role tương ứng
     getRole();
-
-    //renderViewForStudent();
   }, []);
-
-  // const renderViewForStudent = () => {
-  //   for (var i = 0; i < listEnrolledCourses.length; i++) {
-  //     if (courseName === listEnrolledCourses[i].courseName) {
-  //       document.querySelector(".enroll-button").style.display = "none";
-  //       document.querySelector(".joining-button").style.display = "block";
-  //       document.querySelector(".rating-button").style.display = "block";
-  //       break;
-  //     }
-  //   }
-  // };
-
-  // OK
   const editCourseInfo = () => {
     LocalStorageUtils.getToken();
-    const courseNameEdit = document.querySelector("#courseName").value;
+    const bookNameEdit = document.querySelector("#bookName").value;
     const descriptionEdit = document.querySelector("#description").value;
-    const PriceEdit = document.querySelector("#Price").value;
+    const priceEdit = document.querySelector("#price").value;
     // const timeStartEdit = document.querySelector("#timeStart").value;
     // const timeEndEdit = document.querySelector("#timeEnd").value;
     // const startingDateEdit = document.querySelector("#startingDate").value;
     // const endingDateEdit = document.querySelector("#endingDate").value;
     put("/api/book/update", {
       slug: slug,
-      courseName: courseNameEdit,
+      bookName: bookNameEdit,
       description: descriptionEdit,
-      Price: PriceEdit,
+      price: priceEdit,
       // time: {
       //   starting: timeStartEdit,
       //   ending: timeEndEdit,
@@ -172,8 +131,8 @@ function CourseDetail() {
       })
         .then((res) => {
           alert(res.data.message);
-          console.log(res.data.content.Price);
-          user.balance -= parseInt(res.data.content.Price);
+          console.log(res.data.content.price);
+          user.balance -= parseInt(res.data.content.price);
           LocalStorageUtils.setUser(user);
           document.querySelector(".enroll-button").style.display = "none";
           document.querySelector(".joining-button").style.display = "block";
@@ -237,8 +196,7 @@ function CourseDetail() {
         var i = 0;
         while (i < res.data.content.filter((x) => x != null).length) {
           if (
-            courseName ===
-            res.data.content.filter((x) => x != null)[i].courseName
+            bookName === res.data.content.filter((x) => x != null)[i].bookName
           ) {
             formRatingElement.style.display = "block";
             break;
@@ -294,7 +252,7 @@ function CourseDetail() {
                 <div className="card m-4">
                   <img src={picture} className="card-img-top" alt="..." />
                   <div className="card-body">
-                    <h4 className="card-title">{courseName}</h4>
+                    <h4 className="card-title">{bookName}</h4>
                     <p className="card-text">{description}</p>
                     <div
                       className="enroll-button btn-primary mt-4"
@@ -321,7 +279,7 @@ function CourseDetail() {
               <div className="card-content col-lg-6 mt-4 pt-2 card-course-info">
                 <p className="card-text ">
                   <i class="fas fa-dollar-sign mr-2"></i>
-                  <b>Price:</b> <span className="Price-card-text">{Price}</span>
+                  <b>Price:</b> <span className="price-card-text">{price}</span>
                 </p>
                 <div className="card-content mt-4 notify-message">
                   <form className="form-rating ml-4 mt-3">
@@ -357,7 +315,7 @@ function CourseDetail() {
                 <div className="card m-4">
                   <img src={picture} className="card-img-top" alt="..." />
                   <div className="card-body">
-                    <h4 className="card-title">{courseName}</h4>
+                    <h4 className="card-title">{bookName}</h4>
                     <p className="card-text">{description}</p>
                     <div>{renderViewForTutor()}</div>
                   </div>
@@ -367,7 +325,7 @@ function CourseDetail() {
               <div className="card-content col-lg-6 mt-4 pt-2 card-course-info">
                 <p className="card-text ">
                   <i class="fas fa-dollar-sign mr-2"></i>
-                  <b>Price:</b> <span className="Price-card-text">{Price}</span>
+                  <b>Price:</b> <span className="price-card-text">{price}</span>
                 </p>
               </div>
               <div class="col-lg-8 mt-4 course-edit-wrapper">
@@ -382,8 +340,8 @@ function CourseDetail() {
                       <input
                         type="text"
                         class="form-control course-edit-item"
-                        id="courseName"
-                        defaultValue={courseName}
+                        id="bookName"
+                        defaultValue={bookName}
                       />
                     </div>
                     <div class="form-group edit-wrapper">
@@ -400,8 +358,8 @@ function CourseDetail() {
                       <input
                         type="number"
                         class="form-control course-edit-item"
-                        id="Price"
-                        defaultValue={Price}
+                        id="price"
+                        defaultValue={price}
                       />
                     </div>
                     <div
@@ -432,7 +390,7 @@ function CourseDetail() {
                 <div className="card m-4">
                   <img src={picture} className="card-img-top" alt="..." />
                   <div className="card-body">
-                    <h4 className="card-title">{courseName}</h4>
+                    <h4 className="card-title">{bookName}</h4>
                     <p className="card-text">{description}</p>
                   </div>
                 </div>
@@ -441,7 +399,7 @@ function CourseDetail() {
               <div className="card-content col-lg-6 mt-4 pt-2 card-course-info">
                 <p className="card-text ">
                   <i class="fas fa-dollar-sign mr-2"></i>
-                  <b>Price:</b> <span className="Price-card-text">{Price}</span>
+                  <b>Price:</b> <span className="price-card-text">{price}</span>
                 </p>
               </div>
             </div>

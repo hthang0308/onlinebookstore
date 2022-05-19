@@ -33,7 +33,7 @@ const CourseCard = (props) => {
         </div>
         <div className="card-body">
           <h5 className="title card-title align-middle margin:{auto}">
-            {dataDetail.courseName}
+            {dataDetail.bookName}
           </h5>
           <p className="description card-text m-0">
             {dataDetail.description === "" ? (
@@ -44,7 +44,9 @@ const CourseCard = (props) => {
           </p>
           <div className="row">
             <div className="col-sm-12 col-lg-8">
-              <p className="card-text m-0">Price: {dataDetail.Price}</p>
+              <p className="description card-text m-0">
+                Thể loạiiii : {dataDetail.categories.join(", ")}
+              </p>
               {calStar(dataDetail) < 0 ? (
                 `No reviews yet`
               ) : (
