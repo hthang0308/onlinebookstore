@@ -23,7 +23,7 @@ import { Navigate } from "react-router-dom";
 const CourseCreate = (props) => {
   const bookName = useRef("");
   const bookSlug = useRef("");
-  const bookFee = useRef(0);
+  const bookPrice = useRef(0);
   const bookDescription = useRef("");
   const courseUrl = useRef("#");
   const [open, setOpen] = React.useState(false);
@@ -38,7 +38,7 @@ const CourseCreate = (props) => {
       bookName: bookName.current.value,
       slug: bookSlug.current.value,
       description: bookDescription.current.value,
-      fee: bookFee.current.value - 0,
+      Price: bookPrice.current.value - 0,
       picture: url,
     };
     post("/api/book/create", body)
@@ -143,12 +143,12 @@ const CourseCreate = (props) => {
                 inputRef={bookName}
               />
               <RedditTextField
-                label="Fee (VND)"
-                id="fee"
+                label="Price (VND)"
+                id="Price"
                 type="number"
                 variant="filled"
                 style={{ marginTop: 11, marginLeft: 10, width: 200 }}
-                inputRef={bookFee}
+                inputRef={bookPrice}
               />
               <RedditTextField
                 label="Description"
@@ -159,7 +159,7 @@ const CourseCreate = (props) => {
               />
               <RedditTextField
                 label="Image Url"
-                id="fee"
+                id="Price"
                 variant="filled"
                 style={{ marginTop: 11, marginLeft: 10, width: 200 }}
                 inputRef={courseUrl}

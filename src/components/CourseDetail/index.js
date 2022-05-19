@@ -12,7 +12,7 @@ function CourseDetail() {
   // const [timeEnd, setTimeEnd] = useState("");
   // const [startingDate, setStartingDate] = useState("");
   // const [endingDate, setEndingDate] = useState("");
-  const [fee, setFee] = useState("");
+  const [Price, setPrice] = useState("");
   // const [tutor, setTutor] = useState("");
   // const [zoomLink, setZoomLink] = useState("");
   // const [zoomHostLink, setZoomHostLink] = useState("");
@@ -23,7 +23,7 @@ function CourseDetail() {
   const [isAdmin, setIsAdmin] = useState("");
   // const [star, setStar] = useState("");
 
-  const { courseID } = useParams();
+  const { bookID } = useParams();
   const getRole = async () => {
     const user = LocalStorageUtils.getUser();
     if (user !== null) setIsAdmin(user.isAdmin);
@@ -32,7 +32,7 @@ function CourseDetail() {
   const [listEnrolledCourses, setListEnrolledCourse] = useState([]);
   useEffect(() => {
     // Get Course Detail
-    get("/api/book/detail?book=" + courseID).then((res) => {
+    get("/api/book/detail?book=" + bookID).then((res) => {
       const courseName = res.data.content.courseName;
       const description = res.data.content.description;
       let picture = res.data.content.picture;
@@ -44,7 +44,7 @@ function CourseDetail() {
       // const timeEnd = res.data.content.time.ending;
       // const startingDate = res.data.content.startingDate;
       // const endingDate = res.data.content.endingDate;
-      const fee = res.data.content.fee;
+      const Price = res.data.content.Price;
       //const tutor = res.data.content.tutor;
       // const listDay = res.data.content.day;
       // const listRating = res.data.content.rating;
@@ -58,7 +58,7 @@ function CourseDetail() {
       // setTimeEnd(timeEnd);
       // setStartingDate(startingDate);
       // setEndingDate(endingDate);
-      setFee(fee);
+      setPrice(Price);
       // setTutor(tutor);
       // setListDay(listDay);
       // setZoomLink(zoomLink);
@@ -96,7 +96,7 @@ function CourseDetail() {
     LocalStorageUtils.getToken();
     const courseNameEdit = document.querySelector("#courseName").value;
     const descriptionEdit = document.querySelector("#description").value;
-    const feeEdit = document.querySelector("#fee").value;
+    const PriceEdit = document.querySelector("#Price").value;
     // const timeStartEdit = document.querySelector("#timeStart").value;
     // const timeEndEdit = document.querySelector("#timeEnd").value;
     // const startingDateEdit = document.querySelector("#startingDate").value;
@@ -105,7 +105,7 @@ function CourseDetail() {
       slug: slug,
       courseName: courseNameEdit,
       description: descriptionEdit,
-      fee: feeEdit,
+      Price: PriceEdit,
       // time: {
       //   starting: timeStartEdit,
       //   ending: timeEndEdit,
@@ -133,7 +133,7 @@ function CourseDetail() {
   const createZoomHostLink = () => {
     LocalStorageUtils.getToken();
     const user = LocalStorageUtils.getUser();
-    if (user == null) {
+    if ((user = null)) {
       alert("Bạn chưa đăng ký/đăng nhập");
       <Navigate to="/login"></Navigate>;
     } else {
@@ -153,7 +153,7 @@ function CourseDetail() {
   const getMoney = () => {
     console.log("You got 0 money");
     // LocalStorageUtils.getToken();
-    // put("/api/enrolling/get-credit", { course: courseID })
+    // put("/api/enrolling/get-credit", { course: bookID })
     //   .then((res) => alert(res.data.message))
     //   .catch((err) => alert(err.response.data.message));
   };
@@ -167,13 +167,13 @@ function CourseDetail() {
       <Navigate to="/login" />;
     } else {
       post("/api/purchasing/purchase", {
-        book: courseID,
+        book: bookID,
         username: user.username,
       })
         .then((res) => {
           alert(res.data.message);
-          console.log(res.data.content.fee);
-          user.balance -= parseInt(res.data.content.fee);
+          console.log(res.data.content.Price);
+          user.balance -= parseInt(res.data.content.Price);
           LocalStorageUtils.setUser(user);
           document.querySelector(".enroll-button").style.display = "none";
           document.querySelector(".joining-button").style.display = "block";
@@ -218,7 +218,7 @@ function CourseDetail() {
     // const user = LocalStorageUtils.getUser();
     // const starEdit = document.querySelector("#star").value;
     // put("/api/book/rate", {
-    //   course: courseID,
+    //   course: bookID,
     //   rating: { username: user.username, star: starEdit },
     // })
     //   .then((res) => {
@@ -321,7 +321,7 @@ function CourseDetail() {
               <div className="card-content col-lg-6 mt-4 pt-2 card-course-info">
                 <p className="card-text ">
                   <i class="fas fa-dollar-sign mr-2"></i>
-                  <b>Fee:</b> <span className="fee-card-text">{fee}</span>
+                  <b>Price:</b> <span className="Price-card-text">{Price}</span>
                 </p>
                 <div className="card-content mt-4 notify-message">
                   <form className="form-rating ml-4 mt-3">
@@ -367,7 +367,7 @@ function CourseDetail() {
               <div className="card-content col-lg-6 mt-4 pt-2 card-course-info">
                 <p className="card-text ">
                   <i class="fas fa-dollar-sign mr-2"></i>
-                  <b>Fee:</b> <span className="fee-card-text">{fee}</span>
+                  <b>Price:</b> <span className="Price-card-text">{Price}</span>
                 </p>
               </div>
               <div class="col-lg-8 mt-4 course-edit-wrapper">
@@ -396,12 +396,12 @@ function CourseDetail() {
                       />
                     </div>
                     <div class="form-group edit-wrapper">
-                      <label for="description">Fee</label>
+                      <label for="description">Price</label>
                       <input
                         type="number"
                         class="form-control course-edit-item"
-                        id="fee"
-                        defaultValue={fee}
+                        id="Price"
+                        defaultValue={Price}
                       />
                     </div>
                     <div
@@ -441,7 +441,7 @@ function CourseDetail() {
               <div className="card-content col-lg-6 mt-4 pt-2 card-course-info">
                 <p className="card-text ">
                   <i class="fas fa-dollar-sign mr-2"></i>
-                  <b>Fee:</b> <span className="fee-card-text">{fee}</span>
+                  <b>Price:</b> <span className="Price-card-text">{Price}</span>
                 </p>
               </div>
             </div>

@@ -16,7 +16,10 @@ const CourseCard = (props) => {
 
   return (
     <>
-      <div className="card m-4 cardCourse myborder" key={dataDetail.bookName.toUpperCase()}>
+      <div
+        className="card m-4 cardCourse myborder"
+        key={dataDetail.bookName.toUpperCase()}
+      >
         <div className="imgCardCourse">
           {dataDetail.picture === "#" ? (
             <img
@@ -29,20 +32,34 @@ const CourseCard = (props) => {
           )}
         </div>
         <div className="card-body">
-          <h5 className="title card-title align-middle margin:{auto}">{dataDetail.courseName}</h5>
-          <p className="description card-text m-0">{dataDetail.description === "" ? <i>No details</i> : dataDetail.description}</p>
+          <h5 className="title card-title align-middle margin:{auto}">
+            {dataDetail.courseName}
+          </h5>
+          <p className="description card-text m-0">
+            {dataDetail.description === "" ? (
+              <i>No details</i>
+            ) : (
+              dataDetail.description
+            )}
+          </p>
           <div className="row">
             <div className="col-sm-12 col-lg-8">
-              <p className="card-text m-0">Fee: {dataDetail.fee}</p>
+              <p className="card-text m-0">Price: {dataDetail.Price}</p>
               {calStar(dataDetail) < 0 ? (
                 `No reviews yet`
               ) : (
-                <Rating name="read-only" value={calStar(dataDetail)} precision={0.5} size="small" readOnly />
+                <Rating
+                  name="read-only"
+                  value={calStar(dataDetail)}
+                  precision={0.5}
+                  size="small"
+                  readOnly
+                />
               )}
             </div>
             <div className="col-4">
               <a
-                href={"/#/course/" + dataDetail.slug}
+                href={"/#/book/" + dataDetail.slug}
                 className="btn btn-primary mt-2 mb-1 text-right d-flex align-items-center justify-content-center"
               >
                 DETAIL

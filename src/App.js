@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Routes, Route, HashRouter } from "react-router-dom";
 import MainNavigation from "./components/layout/MainNavigation";
 import CourseListPage from "./pages/CourseListPage";
@@ -9,7 +8,7 @@ import Footer from "./components/Footer";
 // import FormSignUpToLoginPage from "./pages/FormSignUpToLoginPage";
 import TestSignUp from "./components/TestSignUp";
 import TestLogin from "./components/TestLogin";
-
+import BookOwnedList from "./components/BookOwnedList";
 //import FormLoginPage from "./pages/FormLoginPage";
 import FormUserEditPage from "./pages/FormUserEditPage";
 //Bao
@@ -25,7 +24,8 @@ function App() {
         <div className="ml-4">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/course-list" element={<CourseListPage />} />
+            <Route path="/book-list" element={<CourseListPage />} />
+            <Route path="/your-book" element={<BookOwnedList />} />
             {/* <Route path="/course-history" element={<CourseHistoryPage />} />
             <Route path="/course-create" element={<CourseCreatePage />} /> */}
 
@@ -34,7 +34,7 @@ function App() {
             <Route path="/form-edit" element={<FormUserEditPage />} />
 
             <Route path="/my-account" element={<Account />} />
-            <Route path="/course/:courseID" element={<CourseDetailPage />} />
+            <Route path="/book/:bookID" element={<CourseDetailPage />} />
           </Routes>
         </div>
       </div>
