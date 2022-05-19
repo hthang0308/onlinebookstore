@@ -150,7 +150,7 @@ class Registration extends Component {
 
             <FormControl required fullWidth margin="normal">
               <InputLabel htmlFor="passwordconfirm" className={classes.labels}>
-                confrim password
+                confirm password
               </InputLabel>
               <Input
                 name="passwordconfirm"
