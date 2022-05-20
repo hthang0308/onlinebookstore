@@ -1,6 +1,6 @@
 import { get } from "../../utils/ApiCaller";
 import { useState, useEffect, useRef } from "react";
-import CourseCard from "../CourseCard";
+import BookCard from "../BookCard";
 import * as React from "react";
 import { alpha, styled } from "@mui/material/styles";
 import { Alert } from "@mui/material";
