@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import TestSignUp from "./components/TestSignUp";
 import TestLogin from "./components/TestLogin";
 import BookOwnedList from "./components/BookOwnedList";
+import CourseCreate from "./components/CourseCreate";
 //import FormLoginPage from "./pages/FormLoginPage";
 import FormUserEditPage from "./pages/FormUserEditPage";
 import CourseDetailPage from "./pages/CourseDetailPage";
@@ -24,6 +25,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/book-list" element={<BookListPage />} />
             <Route path="/your-book" element={<BookOwnedList />} />
+            <Route path="/create-book" element={<CourseCreate />} />
             {/* <Route path="/course-history" element={<CourseHistoryPage />} />
             <Route path="/course-create" element={<CourseCreatePage />} /> */}
 

@@ -36,6 +36,14 @@ const MainNavigation = () => {
               Your Book
             </Link>
           </li>
+          <li className="nav-item">
+            <Link
+              to="/create-book"
+              className="nav-link"
+            >
+              Add New Book
+            </Link>
+          </li>
         </ul>
         <ul className="navbar-nav ml-auto mb-lg-0">
           {user === null ? (
@@ -75,7 +83,6 @@ const MainNavigation = () => {
                   <Avatar />
                 </Link>
               </li>
-
             </>
           )}
           <li className="nav-item">
