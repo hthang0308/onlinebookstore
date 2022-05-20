@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import LocalStorageUtils from "../../utils/LocalStorageUtils";
 import "./MainNavigation.css";
 
@@ -26,22 +26,6 @@ const MainNavigation = () => {
               className="nav-link"
             >
               All Books
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link
-              to="/your-book"
-              className="nav-link"
-            >
-              Your Book
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link
-              to="/create-book"
-              className="nav-link"
-            >
-              Add New Book
             </Link>
           </li>
         </ul>

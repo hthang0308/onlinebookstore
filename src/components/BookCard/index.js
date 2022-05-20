@@ -1,6 +1,7 @@
 import React from "react";
 import "./index.css";
 import Rating from "@mui/material/Rating";
+import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
 
 const BookCard = (props) => {
@@ -23,39 +24,46 @@ const BookCard = (props) => {
     navigate("/book/" + dataDetail.slug, { replace: true })
   }
 
+  const handleAddToCart = () => {
+    window.alert("Add to cart buttton clicked")
+  }
+
   return (
     <div
       className="card m-4 bookCard clearfix"
-      onClick={handleClick}
     >
-      <div className="imgBookCard">
-        <img
-          src={dataDetail.picture === "" ? (
-            "https://images.unsplash.com/photo-1621944190310-e3cca1564bd7?ixlib=rb-1.2.1&raw_url=true&q=80&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687"
-          ) : (
-            dataDetail.picture
-          )}
-          alt="Book thumbnail"
-        />
-      </div>
-      <div className="card-body">
-        <h4>{dataDetail.bookName}</h4>
-        <p className="card-text my-1">Price: {dataDetail.price} ₫</p>
-        <div className="card-text">
-          {calStar(dataDetail) < 0 ? (
-            "No reviews yet"
-          ) : (
-            <Rating
-              name="read-only"
-              value={calStar(dataDetail)}
-              precision={0.5}
-              size="small"
-              readOnly
-            />
-          )}
+      <div onClick={handleClick}>
+        <div className="imgBookCard">
+          <img
+            src={dataDetail.picture === "" ? (
+              "https://images.unsplash.com/photo-1621944190310-e3cca1564bd7?ixlib=rb-1.2.1&raw_url=true&q=80&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687"
+            ) : (
+              dataDetail.picture
+            )}
+            alt="Book thumbnail"
+          />
+        </div>
+        <div className="card-body">
+          <h4 className="card-title">{dataDetail.bookName}</h4>
+          <p className="card-text my-1">Price: {dataDetail.price} ₫</p>
+          <div className="card-text">
+            {calStar(dataDetail) < 0 ? (
+              "No reviews yet"
+            ) : (
+              <Rating
+                name="read-only"
+                value={calStar(dataDetail)}
+                precision={0.5}
+                size="small"
+                readOnly
+              />
+            )}
+          </div>
         </div>
       </div>
+      <Button size="large" onClick={handleAddToCart} variant="contained">Add to cart</Button>
     </div>
+
   );
 };
 

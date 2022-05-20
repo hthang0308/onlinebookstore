@@ -11,7 +11,7 @@ import BookOwnedList from "./components/BookOwnedList";
 import CourseCreate from "./components/CourseCreate";
 //import FormLoginPage from "./pages/FormLoginPage";
 import FormUserEditPage from "./pages/FormUserEditPage";
-import CourseDetailPage from "./pages/CourseDetailPage";
+import BookDetailPage from "./pages/BookDetailPage";
 
 import HomePage from "./pages/HomePage";
 
@@ -34,7 +34,7 @@ function App() {
             <Route path="/form-edit" element={<FormUserEditPage />} />
 
             <Route path="/my-account" element={<Account />} />
-            <Route path="/book/:bookID" element={<CourseDetailPage />} />
+            <Route path="/book/:bookID" element={<BookDetailPage />} />
           </Routes>
         </div>
       </div>
