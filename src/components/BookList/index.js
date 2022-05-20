@@ -45,7 +45,7 @@ const BookList = ({ handleAddToCart }) => {
         justifyContent="center"
         alignItems="center"
       >
-        <TextField id="search" label="Search books" style={{ margin: "0 20px", width: "500px" }} variant="outlined" value={searchText} onChange={searchTextChangeHandler} />
+        <TextField id="search" type="search" label="Search books" style={{ margin: "0 20px", width: "500px" }} variant="outlined" value={searchText} onChange={searchTextChangeHandler} />
         <Button onClick={submitHandler} size="large" variant="outlined"><SearchIcon /></Button>
 
       </Box>
@@ -54,10 +54,12 @@ const BookList = ({ handleAddToCart }) => {
         {!isLoading && dataContent.length > 0 && (
           <Pagination
             data={dataContent.map((dataDetail) => {
+
               return <BookCard handleAddToCart={handleAddToCart} data={dataDetail} key={dataDetail._id} />
             }
 
             )}
+
           />
         )}
         {isLoading ? (
