@@ -13,16 +13,33 @@ import FormUserEditPage from "./pages/FormUserEditPage";
 import BookDetailPage from "./pages/BookDetailPage";
 
 import HomePage from "./pages/HomePage";
-
+import Cart from "./components/Cart/Cart";
+import { useState } from "react";
 function App() {
+
+  const [cart, setCart] = useState([]);
+  const handleAddToCart = (item) => {
+    console.log(item);
+    setCart([...cart, { ...item, qty: 1 }]);
+
+  };
+  const handleChange = (item, d) => {
+    const ind = cart.indexOf(item);
+    const arr = cart;
+    arr[ind].qty += d;
+
+    if (arr[ind].qty === 0) arr[ind].qty = 1;
+    setCart([...arr]);
+  };
+
   return (
     <HashRouter>
       <div>
-        <MainNavigation />
+        <MainNavigation cart={cart} setCart={setCart} handleChange={handleChange} />
         <div className="ml-4">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/book-list" element={<BookListPage />} />
+            <Route path="/book-list" element={<BookListPage handleAddToCart={handleAddToCart} />} />
             <Route path="/your-book" element={<BookOwnedList />} />
             <Route path="/create-book" element={<CourseCreate />} />
             {/* <Route path="/course-history" element={<CourseHistoryPage />} />
@@ -39,7 +56,9 @@ function App() {
       </div>
       <Footer />
     </HashRouter>
+
   );
 }
+
 
 export default App;

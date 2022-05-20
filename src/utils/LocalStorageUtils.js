@@ -41,8 +41,8 @@ class LocalStorageUtils {
             localStorage.clear();
         }
     }
-    
- 
+
+
 };
 
 export default new LocalStorageUtils();

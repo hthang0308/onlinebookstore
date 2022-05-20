@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./index.css";
 import Rating from "@mui/material/Rating";
 import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
 
 const BookCard = (props) => {
-  let navigate = useNavigate()
+  let navigate = useNavigate();
 
   var dataDetail = props.data;
   if (dataDetail === null) return;
@@ -19,13 +19,9 @@ const BookCard = (props) => {
     if (dataDetail.rating.length === 0) return -1;
     return avgstar;
   };
-
+  const item = { slug: dataDetail.slug, name: dataDetail.bookName, author: dataDetail.authorName, picture: dataDetail.picture, price: dataDetail.price };
   const handleClick = () => {
     navigate("/book/" + dataDetail.slug, { replace: true })
-  }
-
-  const handleAddToCart = () => {
-    window.alert("Add to cart buttton clicked")
   }
 
   return (
@@ -61,8 +57,8 @@ const BookCard = (props) => {
           </div>
         </div>
       </div>
-      <Button size="large" onClick={handleAddToCart} variant="contained">Add to cart</Button>
-    </div>
+      <Button onClick={() => props.handleAddToCart(item)} size="large" variant="contained" >Add to cart</Button>
+    </div >
 
   );
 };
