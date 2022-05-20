@@ -40,7 +40,7 @@ const BookList = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <TextField id="search" label="Search books" style={{ margin: "40px 20px", width: "500px" }} variant="outlined" value={searchText} onChange={searchTextChangeHandler} />
+        <TextField id="search" label="Search books" style={{ margin: "0 20px", width: "500px" }} variant="outlined" value={searchText} onChange={searchTextChangeHandler} />
         <Button onClick={submitHandler} size="large" variant="outlined"><SearchIcon /></Button>
       </Box>
       <div>

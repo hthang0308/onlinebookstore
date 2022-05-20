@@ -13,7 +13,6 @@ class Pagination extends React.Component {
   }
 
   handleClick(event) {
-    console.log(event.target.id);
     this.setState({
       currentPage: Number(event.target.id),
     });
