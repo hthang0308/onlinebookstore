@@ -1,0 +1,46 @@
+.bookCard {
+  width: 28% !important;
+  float: left;
+  border-radius: 0 !important;
+  height: auto;
+  cursor: pointer;
+  overflow: hidden !important;
+}
+
+.bookCard:hover {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.imgBookCard {
+  overflow: hidden;
+  width: auto;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+}
+
+.imgBookCard img {
+  transition: transform 0.2s; /* Animation */
+  opacity: 0.9;
+  width: auto !important;
+  height: 100%;
+  background: rgb(207, 207, 207);
+}
+
+.imgBookCard img:hover {
+  opacity: 1;
+  transform: scale(1.3);
+}
+
+.card-title {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  line-height: 1.5;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}

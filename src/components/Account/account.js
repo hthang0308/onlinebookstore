@@ -4,7 +4,7 @@ import "./account.css";
 import { get, post, put } from "../../utils/ApiCaller";
 import LocalStorageUtils from "../../utils/LocalStorageUtils";
 import { Navigate } from "react-router-dom";
-import CourseCard from "../CourseCard";
+import BookCard from "../BookCard";
 
 function AccountManagemnt() {
   const [username, setUsername] = useState("");
@@ -65,7 +65,7 @@ function AccountManagemnt() {
           </div>
           <div className="card-wrapper ">
             {listCourses.map((course, index) => {
-              return <CourseCard dat={course} key={index} />;
+              return <BookCard dat={course} key={index} />;
             })}
           </div>
           <div className="clrfloat border-bottom"></div>

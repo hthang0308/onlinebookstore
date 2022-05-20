@@ -1,6 +1,6 @@
 import { get } from "../../utils/ApiCaller";
 import { useState, useEffect, useRef } from "react";
-import CourseCard from "../CourseCard";
+import BookCard from "../BookCard";
 import * as React from "react";
 import { alpha, styled } from "@mui/material/styles";
 import { Alert } from "@mui/material";
@@ -23,24 +23,31 @@ import { Navigate } from "react-router-dom";
 const CourseCreate = (props) => {
   const bookName = useRef("");
   const bookSlug = useRef("");
-  const bookFee = useRef(0);
+  const bookPrice = useRef(0);
+  const authorName = useRef("");
+  const publisherName = useRef("");
   const bookDescription = useRef("");
-  const courseUrl = useRef("#");
+  const bookUrl = useRef("#");
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [isLoading, setIsLoading] = useState(true);
   const [dataContent, setDataContent] = useState([]);
   const [errMessage, setErrMessage] = useState("");
+  var categories = [];
   const createNewCourse = () => {
-    var url = courseUrl.current.value === "" ? "#" : courseUrl.current.value;
+    var url = bookUrl.current.value === "" ? "#" : bookUrl.current.value;
     var body = {
       bookName: bookName.current.value,
       slug: bookSlug.current.value,
+      authorName: authorName.current.value,
+      publisherName: publisherName.current.value,
       description: bookDescription.current.value,
-      fee: bookFee.current.value - 0,
+      categories,
+      price: bookPrice.current.value - 0,
       picture: url,
     };
+    console.log(body);
     post("/api/book/create", body)
       .then((res) => {
         handleClose();
@@ -55,19 +62,19 @@ const CourseCreate = (props) => {
         }, 2000);
       });
   };
-  useEffect(() => {
-    setIsLoading(true);
-    get("/api/book/my-book", {
-      username: LocalStorageUtils.getUser()?.username,
-    })
-      .then((res) => setDataContent(res.data.content))
-      .then(() => setIsLoading(false));
-  }, []);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   get("/api/book/my-book", {
+  //     username: LocalStorageUtils.getUser()?.username,
+  //   })
+  //     .then((res) => setDataContent(res.data.content))
+  //     .then(() => setIsLoading(false));
+  // }, []);
   if (LocalStorageUtils.getUser() === null) {
     return <Navigate to="/login"></Navigate>;
   }
   if (!LocalStorageUtils.getUser().isAdmin) {
-    return <div className="ml-2 mt-2">You are not a tutor!</div>;
+    return <div className="ml-2 mt-2">You are not an admin</div>;
   }
   const style = {
     position: "absolute",
@@ -104,10 +111,13 @@ const CourseCreate = (props) => {
       },
     },
   }));
+  const setCategories = (value) => {
+    categories = value;
+  };
   return (
     <>
       <div className="title m-1 mt-4 mb-4">
-        Created Courses
+        Create Book Here
         <Button
           className="addbutton ml-3"
           variant="contained"
@@ -133,22 +143,36 @@ const CourseCreate = (props) => {
                 variant="h6"
                 component="h2"
               >
-                Enter Courses Detail
+                Enter Book Detail
               </Typography>
               <RedditTextField
-                label="bookName"
+                label="Enter book name"
                 id="name"
                 variant="filled"
                 style={{ marginTop: 11, width: 300 }}
                 inputRef={bookName}
               />
               <RedditTextField
-                label="Fee (VND)"
-                id="fee"
+                label="Price (VND)"
+                id="price"
                 type="number"
                 variant="filled"
                 style={{ marginTop: 11, marginLeft: 10, width: 200 }}
-                inputRef={bookFee}
+                inputRef={bookPrice}
+              />
+              <RedditTextField
+                label="Author name"
+                id="authorName"
+                variant="filled"
+                style={{ marginTop: 11, width: 300 }}
+                inputRef={authorName}
+              />
+              <RedditTextField
+                label="Publisher name"
+                id="publisherName"
+                variant="filled"
+                style={{ marginTop: 11, marginLeft: 10, width: 200 }}
+                inputRef={publisherName}
               />
               <RedditTextField
                 label="Description"
@@ -159,20 +183,21 @@ const CourseCreate = (props) => {
               />
               <RedditTextField
                 label="Image Url"
-                id="fee"
                 variant="filled"
                 style={{ marginTop: 11, marginLeft: 10, width: 200 }}
-                inputRef={courseUrl}
+                inputRef={bookUrl}
               />
+              <MultipleSelectCheckmarks passData={setCategories} />
               <RedditTextField
                 label="Slug"
-                placeholder="toeic"
+                placeholder=""
                 id="slug"
                 variant="filled"
-                style={{ marginTop: 11, marginLeft: 10, width: 150 }}
+                style={{ marginTop: 11, marginLeft: 10, width: 200 }}
                 inputRef={bookSlug}
               />
               <br />
+
               <div className="alertlog" style={{ display: "none" }}>
                 <Alert
                   severity="error"
@@ -203,18 +228,6 @@ const CourseCreate = (props) => {
           </Fade>
         </Modal>
       </div>
-
-      {!isLoading && dataContent.length > 0 && (
-        <Pagination
-          data={dataContent.map((dataDetail) => (
-            <CourseCard dat={dataDetail} key={dataDetail._id} />
-          ))}
-        ></Pagination>
-      )}
-      {!isLoading && dataContent.length === 0 && (
-        <div className="ml-2">You haven't created any course yet</div>
-      )}
-      {isLoading && <CircularProgress />}
     </>
   );
 };

@@ -13,12 +13,25 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+      width: 200,
     },
   },
 };
 
-const names = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const names = [
+  "Adventure",
+  "Classic",
+  "Comic Book",
+  "Detective/Mystery",
+  "Fantasy",
+  "History",
+  "Horror",
+  "Romance",
+  "Science Fiction",
+  "Biography",
+  "Cookbook",
+  "Self-Help",
+];
 
 export default function MultipleSelectCheckmarks(props) {
   const [personName, setPersonName] = React.useState([]);
@@ -36,15 +49,15 @@ export default function MultipleSelectCheckmarks(props) {
 
   return (
     <>
-      <FormControl style={{ marginTop: 11, marginLeft: 10, width: 150 }}>
-        <InputLabel id="demo-multiple-checkbox-label">Days</InputLabel>
+      <FormControl style={{ marginTop: 11, width: 300 }}>
+        <InputLabel id="demo-multiple-checkbox-label">Categories</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
           value={personName}
           onChange={handleChange}
-          input={<OutlinedInput label="Days" />}
+          input={<OutlinedInput label="Categories" />}
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
         >
