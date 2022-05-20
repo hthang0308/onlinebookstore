@@ -24,12 +24,19 @@ function App() {
     setCart([...cart, { ...item, qty: 1 }]);
 
   };
+  const handleChange = (item, d) => {
+    const ind = cart.indexOf(item);
+    const arr = cart;
+    arr[ind].qty += d;
 
+    if (arr[ind].qty === 0) arr[ind].qty = 1;
+    setCart([...arr]);
+  };
 
   return (
     <HashRouter>
       <div>
-        <MainNavigation cart={cart} setCart={setCart} />
+        <MainNavigation cart={cart} setCart={setCart} handleChange={handleChange} />
         <div className="ml-4">
           <Routes>
             <Route path="/" element={<HomePage />} />

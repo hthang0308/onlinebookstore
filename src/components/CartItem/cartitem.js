@@ -18,7 +18,9 @@ const CartItem = (props) => {
 
                     </div>
                     <div className="col">
-                        <a href="#">-</a><a href="#" className="border">{item.qty}</a><a href="#">+</a>
+                        <button onClick={() => props.handleChange(item, -1)}>-</button>
+                        <a href="#" className="border">{item.qty}</a>
+                        <button onClick={() => props.handleChange(item, 1)}>+</button>
                     </div>
                     <div className="col"> {item.price} vnd <span className="close">&#10005;</span></div>
                 </div>

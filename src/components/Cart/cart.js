@@ -23,7 +23,7 @@ const Cart = (props) => {
                         <div className="modal-body">
                             <div className="cartCard ">
                                 <div className="row">
-                                    <CartTotal CartItems={props.cart} ></CartTotal>
+                                    <CartTotal CartItems={props.cart} handleChange={props.handleChange}></CartTotal>
                                 </div>
                             </div>
 
