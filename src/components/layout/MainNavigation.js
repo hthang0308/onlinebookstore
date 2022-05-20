@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import LocalStorageUtils from "../../utils/LocalStorageUtils";
+import Cart from "../Cart/cart";
 import "./MainNavigation.css";
 const MainNavigation = () => {
   const [user, setUser] = useState();
@@ -62,12 +63,14 @@ const MainNavigation = () => {
               ) : (
                 <></>
               )}
+
+
               <li className="nav-item">
-                <Link
-                  to="/my-account"
-                  className="nav-link active"
-                  aria-current="page"
-                >
+
+                <Cart></Cart>
+              </li>
+              <li className="nav-item">
+                <Link to="/my-account" className="nav-link active" aria-current="page" >
                   MyAccount
                 </Link>
               </li>

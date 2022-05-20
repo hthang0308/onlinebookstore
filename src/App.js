@@ -16,7 +16,7 @@ import FormUserEditPage from "./pages/FormUserEditPage";
 import CourseDetailPage from "./pages/CourseDetailPage";
 
 import HomePage from "./pages/HomePage";
-
+import Cart from "./components/Cart/cart";
 function App() {
   return (
     <HashRouter>
@@ -40,7 +40,9 @@ function App() {
       </div>
       <Footer />
     </HashRouter>
+
   );
 }
+
 
 export default App;

@@ -1,6 +1,7 @@
 import "./index.css";
 import { useState, useEffect } from "react";
 import CourseCard from "../CourseCard";
+import Cart from "../Cart/cart"
 import { get } from "../../utils/ApiCaller";
 import { CircularProgress } from "@mui/material";
 import Pagination from "../Pagination";
@@ -40,8 +41,11 @@ const CourseList = (props) => {
           Search
         </button>
       </form>
+
+
       <div>
         <div className="title m-2 ml-4">All Books</div>
+
         {!isLoading && dataContent.length > 0 && (
           <Pagination
             data={dataContent.map((dataDetail) => (
