@@ -3,10 +3,10 @@ import Avatar from "@mui/material/Avatar";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link, Navigate } from "react-router-dom";
 import LocalStorageUtils from "../../utils/LocalStorageUtils";
-import Cart from "../Cart/cart";
+import Cart from "../Cart/Cart";
 import "./MainNavigation.css";
 
-const MainNavigation = () => {
+const MainNavigation = ({ cart }) => {
   const [user, setUser] = useState(LocalStorageUtils.getUser());
 
   const handleSignOut = () => {
@@ -55,16 +55,11 @@ const MainNavigation = () => {
           ) : (
             <>
               <li className="nav-item">
-                <div
-                  className="nav-link"
-                  onClick={handleSignOut}
-                >
-                  Sign Out
-                </div>
+                <div className="nav-link" onClick={handleSignOut}> Sign Out </div>
               </li>
               <li className="nav-item">
 
-                <Cart></Cart>
+                <Cart cart={cart}></Cart>
               </li>
               <li className="nav-item">
                 <Link

@@ -14,16 +14,26 @@ import FormUserEditPage from "./pages/FormUserEditPage";
 import BookDetailPage from "./pages/BookDetailPage";
 
 import HomePage from "./pages/HomePage";
-import Cart from "./components/Cart/cart";
+import Cart from "./components/Cart/Cart";
+import { useState } from "react";
 function App() {
+
+  const [cart, setCart] = useState([]);
+  const handleAddToCart = (item) => {
+    console.log(item);
+    setCart([...cart, { ...item, qty: 1 }]);
+
+  };
+
+
   return (
     <HashRouter>
       <div>
-        <MainNavigation />
+        <MainNavigation cart={cart} setCart={setCart} />
         <div className="ml-4">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/book-list" element={<BookListPage />} />
+            <Route path="/book-list" element={<BookListPage handleAddToCart={handleAddToCart} />} />
             <Route path="/your-book" element={<BookOwnedList />} />
             <Route path="/create-book" element={<CourseCreate />} />
             {/* <Route path="/course-history" element={<CourseHistoryPage />} />
