@@ -1,17 +1,15 @@
 import { Routes, Route, HashRouter } from "react-router-dom";
 import MainNavigation from "./components/layout/MainNavigation";
-import CourseListPage from "./pages/CourseListPage";
+import BookListPage from "./pages/BookListPage";
 import "./App.css";
 import Account from "./components/Account/account";
 import Footer from "./components/Footer";
-//Phuc
 // import FormSignUpToLoginPage from "./pages/FormSignUpToLoginPage";
 import TestSignUp from "./components/TestSignUp";
 import TestLogin from "./components/TestLogin";
 import BookOwnedList from "./components/BookOwnedList";
 //import FormLoginPage from "./pages/FormLoginPage";
 import FormUserEditPage from "./pages/FormUserEditPage";
-//Bao
 import CourseDetailPage from "./pages/CourseDetailPage";
 
 import HomePage from "./pages/HomePage";
@@ -24,7 +22,7 @@ function App() {
         <div className="ml-4">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/book-list" element={<CourseListPage />} />
+            <Route path="/book-list" element={<BookListPage />} />
             <Route path="/your-book" element={<BookOwnedList />} />
             {/* <Route path="/course-history" element={<CourseHistoryPage />} />
             <Route path="/course-create" element={<CourseCreatePage />} /> */}

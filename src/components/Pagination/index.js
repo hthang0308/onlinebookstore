@@ -1,7 +1,8 @@
 import React from "react";
 import { ReactDOM } from "react";
 import "./index.css";
-export default class Pagination extends React.Component {
+
+class Pagination extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -27,7 +28,7 @@ export default class Pagination extends React.Component {
     const currentTodos = todos.slice(indexOfFirstTodo, indexOfLastTodo);
 
     const renderTodos = currentTodos.map((todo, index) => {
-      return <>{todo}</>;
+      return <div key={index}>{todo}</div>;
     });
 
     // Logic for displaying page numbers
@@ -63,3 +64,5 @@ export default class Pagination extends React.Component {
     );
   }
 }
+
+export default Pagination;
