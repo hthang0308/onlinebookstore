@@ -45,10 +45,12 @@ export default function LabTabs() {
               </Box>
               {dataContent.map((dataDetail, idx) => (
                 <TabPanel value={idx}>
-                  {dataDetail.map((bookitem) => {
+                  {dataDetail.items.map((bookitem) => {
                     return (
                       <>
-                        <a href={"/#/book/" + bookitem.book}>{bookitem.book}</a>{" "}
+                        <a href={"/#/book/" + bookitem.book.slug}>
+                          {bookitem.book.bookName}
+                        </a>{" "}
                         x {bookitem.quantity}
                         <br />
                       </>
