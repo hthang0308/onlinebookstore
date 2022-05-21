@@ -188,14 +188,6 @@ const CourseCreate = (props) => {
                 inputRef={bookUrl}
               />
               <MultipleSelectCheckmarks passData={setCategories} />
-              <RedditTextField
-                label="Slug"
-                placeholder=""
-                id="slug"
-                variant="filled"
-                style={{ marginTop: 11, marginLeft: 10, width: 200 }}
-                inputRef={bookSlug}
-              />
               <br />
 
               <div className="alertlog" style={{ display: "none" }}>

@@ -49,7 +49,7 @@ export default function MultipleSelectCheckmarks(props) {
 
   return (
     <>
-      <FormControl style={{ marginTop: 11, width: 300 }}>
+      <FormControl style={{ marginTop: 11, width: 510 }}>
         <InputLabel id="demo-multiple-checkbox-label">Categories</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
