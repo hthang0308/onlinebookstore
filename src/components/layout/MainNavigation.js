@@ -6,7 +6,7 @@ import LocalStorageUtils from "../../utils/LocalStorageUtils";
 import Cart from "../Cart";
 import "./MainNavigation.css";
 
-const MainNavigation = ({ cart, handleChange }) => {
+const MainNavigation = ({ cart, handleChange, handleRemoveItem }) => {
   const [user, setUser] = useState(LocalStorageUtils.getUser());
 
   const handleSignOut = () => {
@@ -68,7 +68,7 @@ const MainNavigation = ({ cart, handleChange }) => {
             </>
           )}
           <li className="nav-item">
-            <Cart cart={cart} handleChange={handleChange}></Cart>
+            <Cart cart={cart} handleChange={handleChange} handleRemoveItem={handleRemoveItem}></Cart>
           </li>
         </ul>
       </div >

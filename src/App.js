@@ -12,31 +12,49 @@ import FormLoginPage from "./pages/FormLoginPage";
 import FormUserEditPage from "./pages/FormUserEditPage";
 import BookDetailPage from "./pages/BookDetailPage";
 
+import LocalStorageUtils from "./utils/LocalStorageUtils";
 import EditProfile from "./components/EditProfile/UserAccount";
-
 import HomePage from "./pages/HomePage";
 import { useState } from "react";
 function App() {
 
-  const [cart, setCart] = useState([]);
+  const existCart = LocalStorageUtils.getItem("cart");
+
+  const [cart, setCart] = useState(existCart ? existCart : []);
+
+
   const handleAddToCart = (item) => {
-    console.log(item);
-    setCart([...cart, { ...item, qty: 1 }]);
+    const exist = cart.find((x) => x.slug === item.slug)
+    if (exist) {
+      cart.map((x) =>
+        x.slug === item.slug ? handleChange(x, 1) : x
+
+      );
+
+    } else {
+      setCart([...cart, { ...item, qty: 1 }]);
+    }
 
   };
+
   const handleChange = (item, d) => {
     const ind = cart.indexOf(item);
     const arr = cart;
     arr[ind].qty += d;
-
     if (arr[ind].qty === 0) arr[ind].qty = 1;
     setCart([...arr]);
   };
 
+  const handleRemoveItem = (item) => {
+
+    setCart(cart.filter(item2 => item2.slug !== item.slug))
+  }
+
+  LocalStorageUtils.setItem("cart", cart);
   return (
     <HashRouter>
       <div>
-        <MainNavigation cart={cart} setCart={setCart} handleChange={handleChange} />
+        <MainNavigation cart={cart} setCart={setCart} handleChange={handleChange} handleRemoveItem={handleRemoveItem} />
         <div className="ml-4">
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -52,7 +70,7 @@ function App() {
             <Route path="/form-edit" element={<FormUserEditPage />} />
 
             <Route path="/my-account" element={<Account />} />
-            <Route path="/book/:bookID" element={<BookDetailPage />} />
+            <Route path="/book/:bookID" element={<BookDetailPage handleAddToCart={handleAddToCart} />} />
           </Routes>
         </div>
       </div>

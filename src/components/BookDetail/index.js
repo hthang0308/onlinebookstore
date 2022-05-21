@@ -4,7 +4,7 @@ import { get } from "../../utils/ApiCaller";
 import { useParams } from "react-router-dom";
 import { Container, Grid, Typography, Button, CardContent, CardActions, Card, CardMedia, Box, CircularProgress, Rating } from "@mui/material";
 
-function BookDetail() {
+function BookDetail({ handleAddToCart }) {
 
   const [bookDetail, setBookDetail] = useState({})
   const [isLoading, setIsLoading] = useState(true);
@@ -21,9 +21,6 @@ function BookDetail() {
     });
   }, [bookID]);
 
-  const handleAddToCart = () => {
-    window.alert("Add to cart buttton clicked")
-  }
 
   const calStar = (dataDetail) => {
     var avgstar = 0;
@@ -34,7 +31,7 @@ function BookDetail() {
     if (dataDetail.rating.length === 0) return -1;
     return avgstar;
   };
-
+  const item = { slug: bookDetail.slug, name: bookDetail.bookName, author: bookDetail.authorName, picture: bookDetail.picture, price: bookDetail.price };
   return (isLoading) ? (
     <Box
       display="flex"
@@ -91,7 +88,7 @@ function BookDetail() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button onClick={handleAddToCart} size="large" variant="contained">Add to cart</Button>
+              <Button onClick={() => handleAddToCart(item)} size="large" variant="contained">Add to cart</Button>
             </CardActions>
           </Card>
         </Grid>

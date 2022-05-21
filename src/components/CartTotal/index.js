@@ -24,15 +24,11 @@ const CartTotal = (props) => {
             <div className="col-md-8 cart">
                 <div className="title">
                     <div className="row">
-                        <div className="col"><h4><b>Shopping Cart</b></h4></div>
                         <div className="col align-self-center text-right text-muted">{CartItems.length} sách trong giỏ</div>
                     </div>
                 </div>
-                {CartItems.length > 0 && CartItems.map((item) => (<CartItem key={item.slug} item={item} handleChange={props.handleChange}></CartItem>))}
+                {CartItems.length > 0 && CartItems.map((item) => (<CartItem key={item.slug} item={item} handleChange={props.handleChange} handleRemoveItem={props.handleRemoveItem}></CartItem>))}
 
-
-
-                <div className="back-to-shop"><a href="#">&leftarrow;</a><span className="text-muted">Back to shop</span></div>
             </div>
             <div className="col-md-4 summary">
                 <div><h5><b>Summary</b></h5></div>

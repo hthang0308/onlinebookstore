@@ -15,6 +15,7 @@ const Cart = (props) => {
                 <div className="modal-dialog modal-dialog-centered modal-xl" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
+                            <h5 class="modal-title">Shopping Cart</h5>
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -22,7 +23,7 @@ const Cart = (props) => {
                         <div className="modal-body">
                             <div className="cartCard ">
                                 <div className="row">
-                                    <CartTotal CartItems={props.cart} handleChange={props.handleChange}></CartTotal>
+                                    <CartTotal CartItems={props.cart} handleChange={props.handleChange} handleRemoveItem={props.handleRemoveItem}></CartTotal>
                                 </div>
                             </div>
 

@@ -1,3 +1,4 @@
+
 .title {
     margin-bottom: 5vh;
 }
@@ -74,13 +75,21 @@
     font-size: 0.7rem;
 }
 
-/* img {
-    width: 3.5rem;
-} */
 
 .back-to-shop {
     margin-top: 4.5rem;
 }
+
+
+
+/* select {
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    padding: 1.5vh 1vh;
+    margin-bottom: 4vh;
+    outline: none;
+    width: 100%;
+    background-color: rgb(247, 247, 247);
+} */
 
 .checkout-btn {
     background-color: #000;
