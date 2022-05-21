@@ -1,8 +1,5 @@
-import { render } from "@testing-library/react";
 import React, { useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
-import LocalStorageUtils from "../../utils/LocalStorageUtils";
 import CartItem from '../CartItem';
 const CartTotal = (props) => {
     const CartItems = props.CartItems;
