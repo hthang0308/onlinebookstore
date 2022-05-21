@@ -3,7 +3,7 @@ import Avatar from "@mui/material/Avatar";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from "react-router-dom";
 import LocalStorageUtils from "../../utils/LocalStorageUtils";
-import Cart from "../Cart/Cart";
+import Cart from "../Cart";
 import "./MainNavigation.css";
 
 const MainNavigation = ({ cart, handleChange }) => {
