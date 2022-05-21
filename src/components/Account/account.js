@@ -83,25 +83,19 @@ function AccountManagemnt() {
     if (!isAdmin) {
       return (
         <React.Fragment>
-          <div className="row mt-4 button-handle">
-            <form className="mt-4 topup-wrapper">
-              <div className="form-group">
-                <label for="amount">Top Up Here</label>
-                <input
-                  type="number"
-                  className="form-control mt-2"
-                  id="amount"
-                />
-              </div>
-              <button
-                type="button"
-                className="btn btn-primary mt-4 ml-2"
-                onClick={handlePayIn}
-              >
-                Submit
-              </button>
-            </form>
-          </div>
+          <form className="mt-4 topup-wrapper">
+            <div className="form-group">
+              <label for="amount">Top Up Here</label>
+              <input type="number" className="form-control mt-2" id="amount" />
+            </div>
+            <button
+              type="button"
+              className="btn btn-primary mt-4 ml-2"
+              onClick={handlePayIn}
+            >
+              Submit
+            </button>
+          </form>
         </React.Fragment>
       );
     }
@@ -137,12 +131,16 @@ function AccountManagemnt() {
               </div>
             </div>
           </div>
-
-          <div className="row mt-4 mb-4 border-bottom">
-            <h3>Your balance is: {balance} (VND)</h3>
+          <div className="col-lg-12">
+            <div className="row mt-4 mb-4 border-bottom">
+              <h3>Your balance is: {balance} (VND)</h3>
+            </div>
           </div>
-
-          <div>{renderTopUp()}</div>
+          <div className="col-lg-12">
+            <div className="row mt-4 mb-4 border-bottom">
+              <div>{renderTopUp()}</div>
+            </div>
+          </div>
         </div>
       </div>{" "}
     </>
