@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./cart.css";
 import LocalStorageUtils from "../../utils/LocalStorageUtils";
-import CartItem from '../CartItem/CartItem';
-import CartTotal from '../CartTotal/CartTotal';
+import CartItem from '../CartItem';
+import CartTotal from '../CartTotal';
 
 const Cart = (props) => {
 
