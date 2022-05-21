@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./account.css";
 
+import { Breadcrumbs } from "@mui/material";
+import { Typography } from "@mui/material";
 import { get, post, put } from "../../utils/ApiCaller";
 import LocalStorageUtils from "../../utils/LocalStorageUtils";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import BookCard from "../BookCard";
 
 function AccountManagemnt() {
@@ -20,13 +22,13 @@ function AccountManagemnt() {
     const balance = user.balance * 1;
     setUsername(username);
     setBalance(balance);
-    get("/api/purchasing/my-purchasing?username=" + { username }, {
-      username: user.username,
-    })
-      .then((res) => {
-        setListCourses(res.data.content.filter((x) => x != null));
-      })
-      .catch(console.error());
+    // get("/api/purchasing/my-purchase", {
+    //   username: user.username,
+    // })
+    //   .then((res) => {
+    //     setListCourses(res.data.content.filter((x) => x != null));
+    //   })
+    //   .catch(console.error());
   }, []);
 
   if (LocalStorageUtils.getUser() === null) {
@@ -42,6 +44,7 @@ function AccountManagemnt() {
         user.balance += parseInt(amount);
         LocalStorageUtils.setUser(user);
         console.log("amount", amount);
+        window.location.reload();
       }
     );
   };
@@ -104,45 +107,45 @@ function AccountManagemnt() {
     }
   };
   return (
-    <div className="content-wrapper">
-      <div className="container">
-        <div className="row border-bottom">
-          <div className="col-lg-12">
-            <div className="account-info-wrapper mb-4">
-              <h3 className="account-heading">Account</h3>
-              <button
-                className="sign-out-link btn-sm btn-primary"
-                onClick={logOut}
-              >
-                Sign Out
-              </button>
+    <>
+      <div className="content-wrapper">
+        <div className="container">
+          <div className="row border-bottom">
+            <div className="col-lg-12">
+              <div className="account-info-wrapper mb-4">
+                <h3 className="account-heading">Hi, {username}</h3>
+                <button
+                  className="sign-out-link btn-sm btn-primary"
+                  onClick={logOut}
+                >
+                  Sign Out
+                </button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="row border-bottom">
-          <div className="col-lg-12">
-            <div className="account-password-container mb-4 mt-4">
-              <h3 className="account-password-heading">Hi, {username}</h3>
-              <a
-                className="account-management-link btn btn-primary btn-sm"
-                href="/#/form-edit"
-              >
-                AccountManagemnt
-              </a>
+          <div className="row border-bottom">
+            <div className="col-lg-12">
+              <div className="account-password-container mb-4 mt-4">
+                <h3 className="account-password-heading">Manage Account</h3>
+                <a
+                  className="account-management-link btn btn-primary btn-sm"
+                  href="/#/edit"
+                >
+                  Change Account Information
+                </a>
+              </div>
             </div>
           </div>
+
+          <div className="row mt-4 mb-4 border-bottom">
+            <h3>Your balance is: {balance} (VND)</h3>
+          </div>
+
+          <div>{renderTopUp()}</div>
         </div>
-
-        <div>{renderEnrolledCourses()}</div>
-
-        <div className="row mt-4 mb-4 border-bottom">
-          <h3>Your balance is: {balance} (VND)</h3>
-        </div>
-
-        <div>{renderTopUp()}</div>
-      </div>
-    </div>
+      </div>{" "}
+    </>
   );
 }
 

@@ -12,6 +12,8 @@ import FormLoginPage from "./pages/FormLoginPage";
 import FormUserEditPage from "./pages/FormUserEditPage";
 import BookDetailPage from "./pages/BookDetailPage";
 
+import EditProfile from "./components/EditProfile/UserAccount";
+
 import HomePage from "./pages/HomePage";
 import { useState } from "react";
 function App() {
@@ -46,6 +48,7 @@ function App() {
 
             <Route path="/signup" element={<FormSignUpPage />} />
             <Route path="/login" element={<FormLoginPage />} />
+            <Route path="/edit" element={<EditProfile />} />
             <Route path="/form-edit" element={<FormUserEditPage />} />
 
             <Route path="/my-account" element={<Account />} />
