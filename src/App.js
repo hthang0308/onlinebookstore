@@ -15,37 +15,44 @@ import LocalStorageUtils from "./utils/LocalStorageUtils";
 import HomePage from "./pages/HomePage";
 import { useState } from "react";
 function App() {
-  const user = LocalStorageUtils.getUser();
-  const [cart, setCart] = useState([]);
+
+  const existCart = LocalStorageUtils.getItem("cart");
+
+  const [cart, setCart] = useState(existCart ? existCart : []);
+
+
   const handleAddToCart = (item) => {
-    var localCart = [];
-    if (user.cart) {
-      localCart = user.cart;
-    }
-    setCart(localCart);
-    const exist = localCart.find((x) => x.slug === item.slug)
+    const exist = cart.find((x) => x.slug === item.slug)
     if (exist) {
-      return;
+      cart.map((x) =>
+        x.slug === item.slug ? handleChange(x, 1) : x
+
+      );
+
     } else {
       setCart([...cart, { ...item, qty: 1 }]);
     }
+
   };
 
   const handleChange = (item, d) => {
     const ind = cart.indexOf(item);
     const arr = cart;
     arr[ind].qty += d;
-
     if (arr[ind].qty === 0) arr[ind].qty = 1;
     setCart([...arr]);
-
   };
-  console.log(user);
-  LocalStorageUtils.setUser({ ...user, cart: cart });
+
+  const handleRemoveItem = (item) => {
+
+    setCart(cart.filter(item2 => item2.slug !== item.slug))
+  }
+
+  LocalStorageUtils.setItem("cart", cart);
   return (
     <HashRouter>
       <div>
-        <MainNavigation cart={cart} setCart={setCart} handleChange={handleChange} />
+        <MainNavigation cart={cart} setCart={setCart} handleChange={handleChange} handleRemoveItem={handleRemoveItem} />
         <div className="ml-4">
           <Routes>
             <Route path="/" element={<HomePage />} />
