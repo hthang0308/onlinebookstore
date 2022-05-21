@@ -1,12 +1,12 @@
-body {
+/* body {
     background: #ddd;
     min-height: 100vh;
     vertical-align: middle;
-    display: flex;
+    
     font-family: sans-serif;
     font-size: 0.8rem;
     font-weight: bold;
-}
+} */
 
 .title {
     margin-bottom: 5vh;
@@ -79,56 +79,28 @@ body {
     padding: 0 1vh;
 }
 
-a {
-    padding: 0 1vh;
-}
 
 .close {
     margin-left: auto;
     font-size: 0.7rem;
 }
 
-img {
-    width: 3.5rem;
-}
+
 
 .back-to-shop {
     margin-top: 4.5rem;
 }
 
-h5 {
-    margin-top: 4vh;
-}
 
-hr {
-    margin-top: 1.25rem;
-}
 
-form {
-    padding: 2vh 0;
-}
-
-select {
+/* select {
     border: 1px solid rgba(0, 0, 0, 0.137);
     padding: 1.5vh 1vh;
     margin-bottom: 4vh;
     outline: none;
     width: 100%;
     background-color: rgb(247, 247, 247);
-}
-
-input {
-    border: 1px solid rgba(0, 0, 0, 0.137);
-    padding: 1vh;
-    margin-bottom: 4vh;
-    outline: none;
-    width: 100%;
-    background-color: rgb(247, 247, 247);
-}
-
-input:focus::-webkit-input-placeholder {
-    color: transparent;
-}
+} */
 
 .checkout-btn {
     background-color: #000;

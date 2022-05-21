@@ -25,6 +25,10 @@
     -webkit-box-shadow: 1px 1px 1px 1px #C4C4C4;
 }
 
+.container {
+    min-height: 62vh;
+}
+
 .logo-wrapper
 {
     display: flex;

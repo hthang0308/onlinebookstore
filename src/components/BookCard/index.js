@@ -41,7 +41,7 @@ const BookCard = (props) => {
         </div>
         <div className="card-body">
           <h4 className="card-title">{dataDetail.bookName}</h4>
-          <p className="card-text my-1">Price: {dataDetail.price} ₫</p>
+          <h5 className="card-text my-2">{dataDetail.price} ₫</h5>
           <div className="card-text">
             {calStar(dataDetail) < 0 ? (
               "No reviews yet"
