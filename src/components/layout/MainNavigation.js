@@ -58,10 +58,6 @@ const MainNavigation = ({ cart, handleChange }) => {
                 <div className="nav-link" onClick={handleSignOut}> Sign Out </div>
               </li>
               <li className="nav-item">
-
-                <Cart cart={cart} handleChange={handleChange}></Cart>
-              </li>
-              <li className="nav-item">
                 <Link
                   to="/my-account"
                   className="nav-link"
@@ -72,12 +68,7 @@ const MainNavigation = ({ cart, handleChange }) => {
             </>
           )}
           <li className="nav-item">
-            <Link
-              to="/cart"
-              className="nav-link"
-            >
-              <ShoppingCartIcon fontSize="large" />
-            </Link>
+            <Cart cart={cart} handleChange={handleChange}></Cart>
           </li>
         </ul>
       </div >
