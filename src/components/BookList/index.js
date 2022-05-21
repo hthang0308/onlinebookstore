@@ -54,7 +54,6 @@ const BookList = ({ handleAddToCart }) => {
         {!isLoading && dataContent.length > 0 && (
           <Pagination
             data={dataContent.map((dataDetail) => {
-
               return <BookCard handleAddToCart={handleAddToCart} data={dataDetail} key={dataDetail._id} />
             }
 

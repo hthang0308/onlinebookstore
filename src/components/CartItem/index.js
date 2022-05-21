@@ -1,8 +1,4 @@
-import React, { useEffect, useState } from "react";
-
-import { Link } from "react-router-dom";
-import LocalStorageUtils from "../../utils/LocalStorageUtils";
-
+import React from "react";
 
 const CartItem = (props) => {
     const item = props.item;
@@ -19,7 +15,7 @@ const CartItem = (props) => {
                     </div>
                     <div className="col">
                         <button onClick={() => props.handleChange(item, -1)}>-</button>
-                        <a href="#" className="border">{item.qty}</a>
+                        <a className="border">{item.qty}</a>
                         <button onClick={() => props.handleChange(item, 1)}>+</button>
                     </div>
                     <div className="col"> {item.price} vnd <span className="close">&#10005;</span></div>

@@ -13,7 +13,6 @@ import FormUserEditPage from "./pages/FormUserEditPage";
 import BookDetailPage from "./pages/BookDetailPage";
 
 import HomePage from "./pages/HomePage";
-import Cart from "./components/Cart/Cart";
 import { useState } from "react";
 function App() {
 

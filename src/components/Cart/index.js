@@ -1,18 +1,17 @@
-import { render } from "@testing-library/react";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import "./cart.css";
-import LocalStorageUtils from "../../utils/LocalStorageUtils";
-import CartItem from '../CartItem/CartItem';
-import CartTotal from '../CartTotal/CartTotal';
+import CartTotal from '../CartTotal';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const Cart = (props) => {
 
 
     return (
         <>
-            <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#cartModal">cart</button>
-            <div className="modal fade w-100" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+            <button type="button" className="btn" data-toggle="modal" data-target="#cartModal">
+                <ShoppingCartIcon fontSize="large" />
+            </button>
+            <div className="modal fade w-100" id="cartModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
                 <div className="modal-dialog modal-dialog-centered modal-xl" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
