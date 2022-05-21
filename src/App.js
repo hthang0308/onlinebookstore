@@ -11,17 +11,26 @@ import CourseCreate from "./components/CourseCreate";
 import FormLoginPage from "./pages/FormLoginPage";
 import FormUserEditPage from "./pages/FormUserEditPage";
 import BookDetailPage from "./pages/BookDetailPage";
-
+import LocalStorageUtils from "./utils/LocalStorageUtils";
 import HomePage from "./pages/HomePage";
 import { useState } from "react";
 function App() {
-
+  const user = LocalStorageUtils.getUser();
   const [cart, setCart] = useState([]);
   const handleAddToCart = (item) => {
-    console.log(item);
-    setCart([...cart, { ...item, qty: 1 }]);
-
+    var localCart = [];
+    if (user.cart) {
+      localCart = user.cart;
+    }
+    setCart(localCart);
+    const exist = localCart.find((x) => x.slug === item.slug)
+    if (exist) {
+      return;
+    } else {
+      setCart([...cart, { ...item, qty: 1 }]);
+    }
   };
+
   const handleChange = (item, d) => {
     const ind = cart.indexOf(item);
     const arr = cart;
@@ -29,8 +38,10 @@ function App() {
 
     if (arr[ind].qty === 0) arr[ind].qty = 1;
     setCart([...arr]);
-  };
 
+  };
+  console.log(user);
+  LocalStorageUtils.setUser({ ...user, cart: cart });
   return (
     <HashRouter>
       <div>
@@ -49,7 +60,7 @@ function App() {
             <Route path="/form-edit" element={<FormUserEditPage />} />
 
             <Route path="/my-account" element={<Account />} />
-            <Route path="/book/:bookID" element={<BookDetailPage />} />
+            <Route path="/book/:bookID" element={<BookDetailPage handleAddToCart={handleAddToCart} />} />
           </Routes>
         </div>
       </div>
