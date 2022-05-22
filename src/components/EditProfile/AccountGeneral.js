@@ -149,19 +149,10 @@ export default function AccountGeneral() {
                   </Typography>
                 }
               />
-
               <FormHelperText error sx={{ px: 2, textAlign: "center" }}>
                 {touched.photoURLL && errors.photoURLL}
               </FormHelperText>
-
-              <FormControlLabel
-                control={
-                  <Switch {...getFieldProps("isPublic")} color="primary" />
-                }
-                labelPlacement="start"
-                label="Public Profile"
-                sx={{ mt: 5 }}
-              />
+              <h4>{LocalStorageUtils.getUser().username}</h4>
             </Card>
           </Grid>
 

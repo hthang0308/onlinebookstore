@@ -5,10 +5,11 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { CircularProgress } from "@mui/material";
+import { Container, CircularProgress } from "@mui/material";
 import LocalStorageUtils from "../../utils/LocalStorageUtils";
 import { get } from "../../utils/ApiCaller";
-
+import MyBookCard from "./MyBookCard";
+import { format } from "date-fns";
 export default function LabTabs() {
   const [dataContent, setDataContent] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -27,9 +28,9 @@ export default function LabTabs() {
   };
 
   return (
-    <>
+    <Container maxWidth="xl">
       <div>
-        <div className="title m-2 ml-4">All Books</div>
+        <div className="title m-2 ml-4">My Books</div>
         {!isLoading && dataContent.length > 0 && (
           <Box sx={{ width: "100%", typography: "body1" }}>
             <TabContext value={value}>
@@ -39,7 +40,10 @@ export default function LabTabs() {
                   aria-label="lab API tabs example"
                 >
                   {dataContent.map((dataDetail, idx) => (
-                    <Tab label={"List " + idx} value={idx}></Tab>
+                    <Tab
+                      label={format(new Date(dataDetail.date), "dd MMMM yyyy")}
+                      value={idx}
+                    ></Tab>
                   ))}
                 </TabList>
               </Box>
@@ -48,11 +52,16 @@ export default function LabTabs() {
                   {dataDetail.items.map((bookitem) => {
                     return (
                       <>
-                        <a href={"/#/book/" + bookitem.book.slug}>
+                        <MyBookCard
+                          data={bookitem.book}
+                          key={bookitem.book}
+                          quantity={bookitem.quantity}
+                        />
+                        {/* <a href={"/#/book/" + bookitem.book.slug}>
                           {bookitem.book.bookName}
-                        </a>{" "}
+                        </a>
                         x {bookitem.quantity}
-                        <br />
+                        <br /> */}
                       </>
                     );
                   })}
@@ -66,6 +75,6 @@ export default function LabTabs() {
         )}
         {isLoading && <CircularProgress className="m-2" />}
       </div>
-    </>
+    </Container>
   );
 }
