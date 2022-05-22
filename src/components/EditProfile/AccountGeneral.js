@@ -78,7 +78,7 @@ export default function AccountGeneral() {
       address: user.address,
       balance: user.balance,
       city: user.city,
-      role: "Customer",
+      role: user.isAdmin ? "Admin" : "Customer",
       about: user.about,
       isPublic: false,
     },
