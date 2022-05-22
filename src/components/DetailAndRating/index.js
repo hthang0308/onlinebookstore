@@ -4,12 +4,12 @@ import { Box, Tab, Card, Divider } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { get } from "../../utils/ApiCaller";
 // components
-import Markdown from "./Markdown";
+import BookDetail from "../BookDetail";
 import { ProductDetailsReview } from "./product-details";
 import { useParams } from "react-router-dom";
 // ----------------------------------------------------------------------
 
-export default function EcommerceProductDetails() {
+export default function EcommerceProductDetails({ handleAddToCart }) {
   const { bookID } = useParams();
   const [value, setValue] = useState("1");
   const [bookDetail, setBookDetail] = useState();
@@ -49,7 +49,7 @@ export default function EcommerceProductDetails() {
 
             <TabPanel value="1">
               <Box sx={{ p: 3 }}>
-                <Markdown children={bookDetail.description} />
+                <BookDetail handleAddToCart={handleAddToCart}></BookDetail>
               </Box>
             </TabPanel>
             <TabPanel value="2">

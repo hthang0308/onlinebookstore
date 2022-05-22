@@ -10,7 +10,6 @@ import BookOwnedList from "./components/BookOwnedList";
 import CourseCreate from "./components/CourseCreate";
 import FormLoginPage from "./pages/FormLoginPage";
 import FormUserEditPage from "./pages/FormUserEditPage";
-import BookDetailPage from "./pages/BookDetailPage";
 
 import LocalStorageUtils from "./utils/LocalStorageUtils";
 import EditProfile from "./components/EditProfile/UserAccount";
@@ -75,9 +74,8 @@ function App() {
             <Route path="/my-account" element={<Account />} />
             <Route
               path="/book/:bookID"
-              element={<BookDetailPage handleAddToCart={handleAddToCart} />}
+              element={<DetailAndRating handleAddToCart={handleAddToCart} />}
             />
-            <Route path="/booktest/:bookID" element={<DetailAndRating />} />
           </Routes>
         </div>
       </div>

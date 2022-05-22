@@ -1,4 +1,4 @@
-import { sumBy } from "lodash";
+import { over, sumBy } from "lodash";
 import PropTypes from "prop-types";
 import { Icon } from "@iconify/react";
 import { Link as ScrollLink } from "react-scroll";
@@ -45,12 +45,13 @@ ProgressItem.propTypes = {
 
 function ProgressItem({ star, total }) {
   const { name, reviewCount } = star;
+  const barlength = total === 0 ? 0 : (reviewCount / total) * 100;
   return (
     <Stack direction="row" alignItems="center" spacing={1.5}>
       <Typography variant="subtitle2">{name}</Typography>
       <LinearProgress
         variant="determinate"
-        value={(reviewCount / total) * 100}
+        value={barlength}
         sx={{
           mx: 2,
           flexGrow: 1,
@@ -80,28 +81,29 @@ export default function ProductDetailsReviewOverview({ product, onOpen }) {
     r[a.star] = (r[a.star] || 0) + 1;
     return r;
   }, {});
-  console.log(overallLevel[1]);
+  const avgRating =
+    rating.length === 0 ? "?" : (total / rating.length).toFixed(1);
   //create 5 object named starlist1 to starlist5 with name, starCount, reviewCount
   const starlist = [
     {
       name: "1 star",
-      reviewCount: overallLevel[1],
+      reviewCount: overallLevel[1] ? overallLevel[1] : 0,
     },
     {
       name: "2 stars",
-      reviewCount: overallLevel[2],
+      reviewCount: overallLevel[2] ? overallLevel[2] : 0,
     },
     {
       name: "3 stars",
-      reviewCount: overallLevel[3],
+      reviewCount: overallLevel[3] ? overallLevel[3] : 0,
     },
     {
       name: "4 stars",
-      reviewCount: overallLevel[4],
+      reviewCount: overallLevel[4] ? overallLevel[4] : 0,
     },
     {
       name: "5 stars",
-      reviewCount: overallLevel[5],
+      reviewCount: overallLevel[5] ? overallLevel[5] : 0,
     },
   ];
   return (
@@ -111,13 +113,9 @@ export default function ProductDetailsReviewOverview({ product, onOpen }) {
           Average rating
         </Typography>
         <Typography variant="h2" gutterBottom sx={{ color: "error.main" }}>
-          {(total / rating.length).toFixed(1)}
+          {avgRating}
         </Typography>
-        <RatingStyle
-          readOnly
-          value={(total / rating.length).toFixed(1)}
-          precision={0.5}
-        />
+        <RatingStyle readOnly value={avgRating} precision={0.5} />
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
           ({fShortenNumber(rating.length)}
           &nbsp;reviews)
