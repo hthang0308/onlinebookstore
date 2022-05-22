@@ -91,20 +91,9 @@ export default function AccountGeneral() {
           LocalStorageUtils.setUser(res.data.content);
           LocalStorageUtils.setToken(res.data.content.accessToken);
           alert(res.data.message);
+          window.location.reload();
         })
         .catch((err) => console.log(err));
-      //   try {
-      //     await updateProfile({ ...values });
-      //     enqueueSnackbar("Update success", { variant: "success" });
-      //     if (isMountedRef.current) {
-      //       setSubmitting(false);
-      //     }
-      //   } catch (error) {
-      //     if (isMountedRef.current) {
-      //       setErrors({ afterSubmit: error.code });
-      //       setSubmitting(false);
-      //     }
-      //   }
     },
   });
 
@@ -139,6 +128,7 @@ export default function AccountGeneral() {
             <Card sx={{ py: 10, px: 3, textAlign: "center" }}>
               <UploadAvatar
                 accept="image/*"
+                disabled
                 file={values.photoURLL}
                 maxSize={3145728}
                 onDrop={handleDrop}
@@ -224,23 +214,23 @@ export default function AccountGeneral() {
                   </TextField>
                   <TextField
                     fullWidth
-                    label="Balance"
-                    disabled
-                    {...getFieldProps("balance")}
+                    label="City"
+                    {...getFieldProps("city")}
                   />
                 </Stack>
 
                 <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
                   <TextField
                     fullWidth
-                    label="City"
-                    {...getFieldProps("city")}
-                  />
-                  <TextField
-                    fullWidth
                     label="Role"
                     disabled
                     {...getFieldProps("role")}
+                  />
+                  <TextField
+                    fullWidth
+                    label="Balance"
+                    disabled
+                    {...getFieldProps("balance")}
                   />
                 </Stack>
 

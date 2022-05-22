@@ -3,7 +3,7 @@ import { capitalCase } from "change-case";
 import { useState, useEffect } from "react";
 // import bellFill from "@iconify/icons-eva/bell-fill";
 // import shareFill from "@iconify/icons-eva/share-fill";
-// import roundVpnKey from "@iconify/icons-ic/round-vpn-key";
+import roundVpnKey from "@iconify/icons-ic/round-vpn-key";
 // import roundReceipt from "@iconify/icons-ic/round-receipt";
 import roundAccountBox from "@iconify/icons-ic/round-account-box";
 // material
@@ -30,6 +30,7 @@ import HeaderBreadcrumbs from "./HeaderBreadcrumbs";
 //   AccountChangePassword,
 // } from "./AccountGeneral";
 import AccountGeneral from "./AccountGeneral";
+import AccountChangePassword from "./AccountChangePassword";
 
 // ----------------------------------------------------------------------
 
@@ -57,11 +58,11 @@ export default function UserAccount() {
     //   icon: <Icon icon={shareFill} width={20} height={20} />,
     //   component: <AccountSocialLinks />,
     // },
-    // {
-    //   value: "change_password",
-    //   icon: <Icon icon={roundVpnKey} width={20} height={20} />,
-    //   component: <AccountChangePassword />,
-    // },
+    {
+      value: "change_password",
+      icon: <Icon icon={roundVpnKey} width={20} height={20} />,
+      component: <AccountChangePassword />,
+    },
   ];
 
   const handleChangeTab = (event, newValue) => {
