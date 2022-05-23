@@ -101,7 +101,7 @@ function BookDetail({ handleAddToCart }) {
               </Typography>
             </CardContent>
             <CardActions>
-              {LocalStorageUtils.getUser().isAdmin ? (
+              {(LocalStorageUtils.getUser()?.isAdmin) ? (
                 <Button
                   href={"/#/book/" + bookID + "/edit"}
                   color="success"

@@ -67,7 +67,7 @@ const BookCard = (props) => {
         </Button>
       ) : (
         <Button
-          onClick={() => handleClick(item)}
+          onClick={() => props.handleAddToCart(item)}
           size="large"
           variant="contained"
         >
