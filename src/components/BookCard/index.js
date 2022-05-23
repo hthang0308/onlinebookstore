@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./index.css";
 import Rating from "@mui/material/Rating";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import LocalStorageUtils from "../../utils/LocalStorageUtils";
 
 const BookCard = (props) => {
   let navigate = useNavigate();
@@ -21,21 +22,19 @@ const BookCard = (props) => {
   };
   const item = dataDetail;
   const handleClick = () => {
-    navigate("/book/" + dataDetail.slug, { replace: true })
-  }
+    navigate("/book/" + dataDetail.slug, { replace: true });
+  };
 
   return (
-    <div
-      className="card m-4 bookCard clearfix"
-    >
+    <div className="card m-4 bookCard clearfix">
       <div onClick={handleClick}>
         <div className="imgBookCard">
           <img
-            src={dataDetail.picture === "" ? (
-              "https://images.unsplash.com/photo-1621944190310-e3cca1564bd7?ixlib=rb-1.2.1&raw_url=true&q=80&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687"
-            ) : (
-              dataDetail.picture
-            )}
+            src={
+              dataDetail.picture === ""
+                ? "https://images.unsplash.com/photo-1621944190310-e3cca1564bd7?ixlib=rb-1.2.1&raw_url=true&q=80&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687"
+                : dataDetail.picture
+            }
             alt="Book thumbnail"
           />
         </div>
@@ -57,9 +56,25 @@ const BookCard = (props) => {
           </div>
         </div>
       </div>
-      <Button onClick={() => props.handleAddToCart(item)} size="large" variant="contained" >Add to cart</Button>
-    </div >
-
+      {LocalStorageUtils.getUser()?.isAdmin ? (
+        <Button
+          href={"/#/book/" + dataDetail.slug + "/edit"}
+          color="success"
+          size="large"
+          variant="contained"
+        >
+          Edit this book
+        </Button>
+      ) : (
+        <Button
+          onClick={() => handleClick(item)}
+          size="large"
+          variant="contained"
+        >
+          Add to cart
+        </Button>
+      )}
+    </div>
   );
 };
 

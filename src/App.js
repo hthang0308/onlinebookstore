@@ -7,7 +7,7 @@ import Footer from "./components/Footer";
 import FormSignUpPage from "./pages/FormSignUpPage";
 // import FormSignUpToLoginPage from "./pages/FormSignUpToLoginPage";
 import MyInvoicePage from "./pages/MyInvoicePage";
-import BookCreate from "./components/BookCreate";
+import BookEdit from "./components/BookEdit";
 import FormLoginPage from "./pages/FormLoginPage";
 import FormUserEditPage from "./pages/FormUserEditPage";
 
@@ -63,9 +63,8 @@ function App() {
               element={<BookListPage handleAddToCart={handleAddToCart} />}
             />
 
-            <Route path="/create-book" element={<BookCreate />} />
-            {/* <Route path="/course-history" element={<CourseHistoryPage />} />
-            <Route path="/course-create" element={<BookCreatePage />} /> */}
+            <Route path="/create-book" element={<BookEdit />} />
+            <Route path="/book/:bookID/edit" element={<BookEdit />} />
 
             <Route path="/signup" element={<FormSignUpPage />} />
             <Route path="/login" element={<FormLoginPage />} />

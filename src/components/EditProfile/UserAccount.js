@@ -10,15 +10,7 @@ import roundAccountBox from "@iconify/icons-ic/round-account-box";
 import { Container, Tab, Box, Tabs, Stack } from "@mui/material";
 // redux
 // import { useDispatch } from "./store";
-import {
-  getCards,
-  getProfile,
-  getInvoices,
-  getAddressBook,
-  getNotifications,
-} from "./user";
 // routes
-import { PATH_DASHBOARD } from "./paths";
 // hooks
 import useSettings from "./useSettings";
 // components
