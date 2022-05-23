@@ -23,7 +23,7 @@ function Home() {
           <div className="col lg-6">
             <div className="content__right-side-wrapper">
               <img
-                src="student.png"
+                src="bookthumbnail.png"
                 alt=""
                 className="content__right-side-img"
               />
