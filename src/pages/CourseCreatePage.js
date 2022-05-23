@@ -1,5 +1,5 @@
-import CourseCreate from "../components/CourseCreate";
-const CourseCreatePage = () => {
-  return <CourseCreate></CourseCreate>;
+import BookCreate from "../components/BookCreate";
+const BookCreatePage = () => {
+  return <BookCreate></BookCreate>;
 };
-export default CourseCreatePage;
+export default BookCreatePage;
