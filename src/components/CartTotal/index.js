@@ -1,24 +1,48 @@
 import React, { useEffect, useState } from "react";
-
+import LocalStorageUtils from "../../utils/LocalStorageUtils"
+import { get, put, post } from "../../utils/ApiCaller"
 import CartItem from '../CartItem';
 const CartTotal = (props) => {
     const CartItems = props.CartItems;
     // var price = 0;
     // for (var item of CartItems) {
-    //     price += item.price * item.qty;
+    //     price += item.price * item.quantity;
     // }
 
     const [total, setTotal] = useState(0);
     const handlePrice = () => {
         var price = 0;
         for (var item of CartItems) {
-            price += item.price * item.qty;
+            price += item.book.price * item.quantity;
         }
         setTotal(price);
     }
     useEffect(() => {
         handlePrice();
     });
+    const createPurchase = async (values) => {
+        console.log(values);
+        post("/api/purchasing/purchase", {
+            items: values,
+            username: LocalStorageUtils.getUser().username,
+        })
+            .then((res) => {
+                console.log({
+                    items: values,
+                    username: LocalStorageUtils.getUser().username,
+                });
+                var user = LocalStorageUtils.getUser();
+                user.balance = res.data.newBalance;
+                LocalStorageUtils.setUser(user);
+                values = [];
+                LocalStorageUtils.setItem("cart", values);
+                alert(res.data.message);
+                window.location.reload();
+            })
+            .catch((err) => alert(err.response.data.message));
+
+    }
+
     return (
         <>
             <div className="col-md-8 cart">
@@ -27,7 +51,7 @@ const CartTotal = (props) => {
                         <div className="col align-self-center text-right text-muted">{CartItems.length} sách trong giỏ</div>
                     </div>
                 </div>
-                {CartItems.length > 0 && CartItems.map((item) => (<CartItem key={item.slug} item={item} handleChange={props.handleChange} handleRemoveItem={props.handleRemoveItem}></CartItem>))}
+                {CartItems.length > 0 && CartItems.map((item) => (<CartItem key={item.book.slug} item={item} handleChange={props.handleChange} handleRemoveItem={props.handleRemoveItem}></CartItem>))}
 
             </div>
             <div className="col-md-4 summary">
@@ -36,7 +60,7 @@ const CartTotal = (props) => {
                     <div className="col">TOTAL PRICE</div>
                     <div className="col text-right">{total} ₫</div>
                 </div>
-                <button className="checkout-btn ">CHECKOUT</button>
+                <button onClick={() => createPurchase(CartItems)} className="checkout-btn ">CHECKOUT</button>
             </div>
         </>
 

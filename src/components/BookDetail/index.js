@@ -31,7 +31,7 @@ function BookDetail({ handleAddToCart }) {
     if (dataDetail.rating.length === 0) return -1;
     return avgstar;
   };
-  const item = { slug: bookDetail.slug, name: bookDetail.bookName, author: bookDetail.authorName, picture: bookDetail.picture, price: bookDetail.price };
+  const item = bookDetail;
   return (isLoading) ? (
     <Box
       display="flex"

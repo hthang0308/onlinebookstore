@@ -24,24 +24,24 @@ function App() {
   const [cart, setCart] = useState(existCart ? existCart : []);
 
   const handleAddToCart = (item) => {
-    const exist = cart.find((x) => x.slug === item.slug);
+    const exist = cart.find((x) => x.book.slug === item.slug);
     if (exist) {
-      cart.map((x) => (x.slug === item.slug ? handleChange(x, 1) : x));
+      cart.map((x) => (x.book.slug === item.slug ? handleChange(x, 1) : x));
     } else {
-      setCart([...cart, { ...item, qty: 1 }]);
+      setCart([...cart, { book: item, quantity: 1 }]);
     }
   };
 
   const handleChange = (item, d) => {
     const ind = cart.indexOf(item);
     const arr = cart;
-    arr[ind].qty += d;
-    if (arr[ind].qty === 0) arr[ind].qty = 1;
+    arr[ind].quantity += d;
+    if (arr[ind].quantity === 0) arr[ind].quantity = 1;
     setCart([...arr]);
   };
 
   const handleRemoveItem = (item) => {
-    setCart(cart.filter((item2) => item2.slug !== item.slug));
+    setCart(cart.filter((item2) => item2.book.slug !== item.book.slug));
   };
 
   LocalStorageUtils.setItem("cart", cart);

@@ -19,7 +19,7 @@ const BookCard = (props) => {
     if (dataDetail.rating.length === 0) return -1;
     return avgstar;
   };
-  const item = { slug: dataDetail.slug, name: dataDetail.bookName, author: dataDetail.authorName, picture: dataDetail.picture, price: dataDetail.price };
+  const item = dataDetail;
   const handleClick = () => {
     navigate("/book/" + dataDetail.slug, { replace: true })
   }
