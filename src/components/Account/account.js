@@ -22,57 +22,6 @@ function AccountManagemnt() {
     LocalStorageUtils.clear();
     window.location.reload();
   };
-<<<<<<< HEAD
-
-  const renderEnrolledCourses = () => {
-    const user = LocalStorageUtils.getUser();
-    const isAdmin = user.isAdmin;
-    if (!isAdmin) {
-      return (
-        <React.Fragment>
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="booking-container">
-                <h3 className="booking-heading">My Book </h3>
-              </div>
-            </div>
-          </div>
-          <div className="card-wrapper ">
-            {listCourses.map((course, index) => {
-              return <BookCard dat={course} key={index} />;
-            })}
-          </div>
-          <div className="clrfloat border-bottom"></div>
-        </React.Fragment>
-      );
-    }
-  };
-
-  const renderTopUp = () => {
-    const user = LocalStorageUtils.getUser();
-    const isAdmin = user.isAdmin;
-    if (!isAdmin) {
-      return (
-        <React.Fragment>
-          <form className="mt-4 topup-wrapper">
-            <div className="form-group">
-              <label htmlFor="amount">Top Up Here</label>
-              <input type="number" className="form-control mt-2" id="amount" />
-            </div>
-            <button
-              type="button"
-              className="btn btn-primary mt-4 ml-2"
-              onClick={handlePayIn}
-            >
-              Submit
-            </button>
-          </form>
-        </React.Fragment>
-      );
-    }
-  };
-=======
->>>>>>> main
   return (
     <>
       <div className="content-wrapper">
