@@ -1,57 +1,28 @@
 import React, { useEffect, useState } from "react";
 import "./account.css";
-
-import { Breadcrumbs } from "@mui/material";
-import { Typography } from "@mui/material";
-import { get, post, put } from "../../utils/ApiCaller";
 import LocalStorageUtils from "../../utils/LocalStorageUtils";
-import { Link, Navigate } from "react-router-dom";
-import BookCard from "../BookCard";
-
+import { Navigate } from "react-router-dom";
 function AccountManagemnt() {
   const [username, setUsername] = useState("");
-  const [listCourses, setListCourses] = useState([]);
   const [balance, setBalance] = useState("");
-
+  const user = LocalStorageUtils.getUser();
   useEffect(() => {
-    // Get User + Course List
-
     const user = LocalStorageUtils.getUser();
     if (user === null) return;
     const username = user.username;
     const balance = user.balance * 1;
     setUsername(username);
     setBalance(balance);
-    // get("/api/purchasing/my-purchase", {
-    //   username: user.username,
-    // })
-    //   .then((res) => {
-    //     setListCourses(res.data.content.filter((x) => x != null));
-    //   })
-    //   .catch(console.error());
   }, []);
 
   if (LocalStorageUtils.getUser() === null) {
     return <Navigate to="/login" />;
   }
-  const handlePayIn = (req) => {
-    LocalStorageUtils.getToken();
-    const user = LocalStorageUtils.getUser();
-    const amount = document.querySelector("#amount").value;
-    put("/api/user/top-up", { username: user?.username, amount: amount }).then(
-      (res) => {
-        alert(res.data.message);
-        user.balance += parseInt(amount);
-        LocalStorageUtils.setUser(user);
-        console.log("amount", amount);
-        window.location.reload();
-      }
-    );
-  };
   const logOut = () => {
     LocalStorageUtils.clear();
     window.location.reload();
   };
+<<<<<<< HEAD
 
   const renderEnrolledCourses = () => {
     const user = LocalStorageUtils.getUser();
@@ -100,6 +71,8 @@ function AccountManagemnt() {
       );
     }
   };
+=======
+>>>>>>> main
   return (
     <>
       <div className="content-wrapper">
@@ -121,28 +94,52 @@ function AccountManagemnt() {
           <div className="row border-bottom">
             <div className="col-lg-12">
               <div className="account-password-container mb-4 mt-4">
-                <h3 className="account-password-heading">Manage Account</h3>
+                <h3 className="account-password-heading">My Account</h3>
                 <a
                   className="account-management-link btn btn-primary btn-sm"
-                  href="/#/edit"
+                  href="/#/change-account-info"
                 >
-                  Change Account Information
+                  Manage
                 </a>
               </div>
             </div>
           </div>
-          <div className="col-lg-12">
-            <div className="row mt-4 mb-4 border-bottom">
-              <h3>Your balance is: {balance} (VND)</h3>
-            </div>
-          </div>
-          <div className="col-lg-12">
-            <div className="row mt-4 mb-4 border-bottom">
-              <div>{renderTopUp()}</div>
-            </div>
-          </div>
+          {user.isAdmin ? (
+            <></>
+          ) : (
+            <>
+              <div className="row border-bottom">
+                <div className="col-lg-12">
+                  <div className="account-password-container mb-4 mt-4">
+                    <h3 className="account-password-heading">My Purchases</h3>
+                    <a
+                      className="account-management-link btn btn-primary btn-sm"
+                      href="/#/view-my-purchases"
+                    >
+                      View All
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="row border-bottom">
+                <div className="col-lg-12">
+                  <div className="account-password-container mb-4 mt-4">
+                    <h3 className="account-password-heading">
+                      Your balance is: {balance} (VND)
+                    </h3>
+                    <a
+                      className="account-management-link btn btn-primary btn-sm"
+                      href="/#/top-up"
+                    >
+                      Top Up
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
         </div>
-      </div>{" "}
+      </div>
     </>
   );
 }

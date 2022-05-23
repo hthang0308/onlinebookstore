@@ -31,15 +31,11 @@ const MainNavigation = ({ cart, handleChange, handleRemoveItem }) => {
           ) : user.isAdmin ? (
             <li className="nav-item">
               <Link to="/create-book" className="nav-link">
-                Create New Books
+                Create New Book
               </Link>
             </li>
           ) : (
-            <li className="nav-item">
-              <Link to="/my-book" className="nav-link">
-                My Books
-              </Link>
-            </li>
+            <></>
           )}
         </ul>
         <ul className="navbar-nav ml-auto mb-lg-0">
@@ -72,13 +68,17 @@ const MainNavigation = ({ cart, handleChange, handleRemoveItem }) => {
               </li>
             </>
           )}
-          <li className="nav-item">
-            <Cart
-              cart={cart}
-              handleChange={handleChange}
-              handleRemoveItem={handleRemoveItem}
-            ></Cart>
-          </li>
+          {user?.isAdmin ? (
+            <></>
+          ) : (
+            <li className="nav-item">
+              <Cart
+                cart={cart}
+                handleChange={handleChange}
+                handleRemoveItem={handleRemoveItem}
+              ></Cart>
+            </li>
+          )}
         </ul>
       </div>
     </nav>
