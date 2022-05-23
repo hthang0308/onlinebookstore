@@ -6,8 +6,8 @@ import Account from "./components/Account/account";
 import Footer from "./components/Footer";
 import FormSignUpPage from "./pages/FormSignUpPage";
 // import FormSignUpToLoginPage from "./pages/FormSignUpToLoginPage";
-import MyBook from "./components/MyBook";
-import CourseCreate from "./components/CourseCreate";
+import MyInvoicePage from "./pages/MyInvoicePage";
+import BookCreate from "./components/BookCreate";
 import FormLoginPage from "./pages/FormLoginPage";
 import FormUserEditPage from "./pages/FormUserEditPage";
 
@@ -18,6 +18,7 @@ import DetailAndRating from "./components/DetailAndRating";
 
 import HomePage from "./pages/HomePage";
 import { useState } from "react";
+import TopUp from "./components/TopUp";
 function App() {
   const existCart = LocalStorageUtils.getItem("cart");
 
@@ -61,14 +62,16 @@ function App() {
               path="/book-list"
               element={<BookListPage handleAddToCart={handleAddToCart} />}
             />
-            <Route path="/my-book" element={<MyBook />} />
-            <Route path="/create-book" element={<CourseCreate />} />
+
+            <Route path="/create-book" element={<BookCreate />} />
             {/* <Route path="/course-history" element={<CourseHistoryPage />} />
-            <Route path="/course-create" element={<CourseCreatePage />} /> */}
+            <Route path="/course-create" element={<BookCreatePage />} /> */}
 
             <Route path="/signup" element={<FormSignUpPage />} />
             <Route path="/login" element={<FormLoginPage />} />
-            <Route path="/edit" element={<EditProfile />} />
+            <Route path="/change-account-info" element={<EditProfile />} />
+            <Route path="/view-my-purchases" element={<MyInvoicePage />} />
+            <Route path="/top-up" element={<TopUp />} />
             <Route path="/form-edit" element={<FormUserEditPage />} />
 
             <Route path="/my-account" element={<Account />} />

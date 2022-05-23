@@ -4,10 +4,7 @@ import { get, put, post } from "../../utils/ApiCaller"
 import CartItem from '../CartItem';
 const CartTotal = (props) => {
     const CartItems = props.CartItems;
-    // var price = 0;
-    // for (var item of CartItems) {
-    //     price += item.price * item.quantity;
-    // }
+  
 
     const [total, setTotal] = useState(0);
     const handlePrice = () => {
