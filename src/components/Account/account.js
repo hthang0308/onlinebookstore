@@ -85,7 +85,7 @@ function AccountManagemnt() {
         <React.Fragment>
           <form className="mt-4 topup-wrapper">
             <div className="form-group">
-              <label for="amount">Top Up Here</label>
+              <label htmlFor="amount">Top Up Here</label>
               <input type="number" className="form-control mt-2" id="amount" />
             </div>
             <button
