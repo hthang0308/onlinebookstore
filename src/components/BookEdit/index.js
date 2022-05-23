@@ -38,7 +38,7 @@ export default function EcommerceProductCreate() {
         links={[
           {
             name: !isEdit ? "All Books" : bookID,
-            href: !isEdit ? "book-list" : "/book/" + bookID,
+            href: !isEdit ? "book" : "/book/" + bookID,
           },
           { name: !isEdit ? "New book" : "Edit" },
         ]}

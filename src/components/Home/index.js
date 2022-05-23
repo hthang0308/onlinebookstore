@@ -12,7 +12,7 @@ function Home() {
               <div className="content__left-side-btn-wrapper">
                 <a
                   className="content__left-side-btn btn btn-primary"
-                  href="/#/book-list"
+                  href="/#/book"
                   role="button"
                 >
                   View All Books Available
