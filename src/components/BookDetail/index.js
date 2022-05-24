@@ -2,11 +2,23 @@ import React, { useEffect, useState } from "react";
 import "./BookDetail.css";
 import { get } from "../../utils/ApiCaller";
 import { useParams } from "react-router-dom";
-import { Container, Grid, Typography, Button, CardContent, CardActions, Card, CardMedia, Box, CircularProgress, Rating } from "@mui/material";
+import {
+  Container,
+  Grid,
+  Typography,
+  Button,
+  CardContent,
+  CardActions,
+  Card,
+  CardMedia,
+  Box,
+  CircularProgress,
+  Rating,
+} from "@mui/material";
+import LocalStorageUtils from "../../utils/LocalStorageUtils";
 
 function BookDetail({ handleAddToCart }) {
-
-  const [bookDetail, setBookDetail] = useState({})
+  const [bookDetail, setBookDetail] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   const { bookID } = useParams();
@@ -14,13 +26,10 @@ function BookDetail({ handleAddToCart }) {
   useEffect(() => {
     // Get Book Detail
     get("/api/book/detail?book=" + bookID).then((res) => {
-
       setBookDetail(res.data.content);
       setIsLoading(false);
-
     });
   }, [bookID]);
-
 
   const calStar = (dataDetail) => {
     var avgstar = 0;
@@ -32,30 +41,34 @@ function BookDetail({ handleAddToCart }) {
     return avgstar;
   };
   const item = bookDetail;
-  return (isLoading) ? (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-    >
+  return isLoading ? (
+    <Box display="flex" justifyContent="center" alignItems="center">
       <CircularProgress className="m-2" />
     </Box>
   ) : (
-    <Container maxWidth="lg" sx={{ minHeight: '70vh' }}>
+    <Container maxWidth="lg" sx={{ minHeight: "70vh" }}>
       <Grid container spacing={5}>
         <Grid item xs={4}>
           <Card>
             <CardMedia
               component="img"
-              image={bookDetail.picture || "https://images.unsplash.com/photo-1621944190310-e3cca1564bd7?ixlib=rb-1.2.1&raw_url=true&q=80&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687"}
+              image={
+                bookDetail.picture ||
+                "https://images.unsplash.com/photo-1621944190310-e3cca1564bd7?ixlib=rb-1.2.1&raw_url=true&q=80&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687"
+              }
               alt="Book thumbnail"
             />
           </Card>
         </Grid>
         <Grid item xs={8}>
-          <Card sx={{ px: 5, py: 3 }} >
+          <Card sx={{ px: 5, py: 3 }}>
             <CardContent>
-              <Typography gutterBottom sx={{ fontWeight: 600 }} variant="h4" component="div">
+              <Typography
+                gutterBottom
+                sx={{ fontWeight: 600 }}
+                variant="h4"
+                component="div"
+              >
                 {bookDetail.bookName}
               </Typography>
               <Typography gutterBottom className="card-text">
@@ -88,13 +101,30 @@ function BookDetail({ handleAddToCart }) {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button onClick={() => handleAddToCart(item)} size="large" variant="contained">Add to cart</Button>
+              {(LocalStorageUtils.getUser()?.isAdmin) ? (
+                <Button
+                  href={"/#/book/" + bookID + "/edit"}
+                  color="success"
+                  size="large"
+                  variant="contained"
+                >
+                  Edit this book
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => handleAddToCart(item)}
+                  size="large"
+                  variant="contained"
+                >
+                  Add to cart
+                </Button>
+              )}
             </CardActions>
           </Card>
         </Grid>
       </Grid>
     </Container>
-  )
+  );
 }
 
 export default BookDetail;

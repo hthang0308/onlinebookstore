@@ -12,7 +12,7 @@ function Home() {
               <div className="content__left-side-btn-wrapper">
                 <a
                   className="content__left-side-btn btn btn-primary"
-                  href="/#/book-list"
+                  href="/#/book"
                   role="button"
                 >
                   View All Books Available
@@ -23,7 +23,7 @@ function Home() {
           <div className="col lg-6">
             <div className="content__right-side-wrapper">
               <img
-                src="student.png"
+                src="bookthumbnail.png"
                 alt=""
                 className="content__right-side-img"
               />

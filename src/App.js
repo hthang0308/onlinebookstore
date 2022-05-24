@@ -5,9 +5,8 @@ import "./App.css";
 import Account from "./components/Account/account";
 import Footer from "./components/Footer";
 import FormSignUpPage from "./pages/FormSignUpPage";
-// import FormSignUpToLoginPage from "./pages/FormSignUpToLoginPage";
 import MyInvoicePage from "./pages/MyInvoicePage";
-import BookCreate from "./components/BookCreate";
+import BookEdit from "./components/BookEdit";
 import FormLoginPage from "./pages/FormLoginPage";
 import FormUserEditPage from "./pages/FormUserEditPage";
 
@@ -19,6 +18,9 @@ import DetailAndRating from "./components/DetailAndRating";
 import HomePage from "./pages/HomePage";
 import { useState } from "react";
 import TopUp from "./components/TopUp";
+
+import ThemeConfig from "./theme";
+
 function App() {
   const existCart = LocalStorageUtils.getItem("cart");
 
@@ -47,43 +49,44 @@ function App() {
 
   LocalStorageUtils.setItem("cart", cart);
   return (
-    <HashRouter>
-      <div>
-        <MainNavigation
-          cart={cart}
-          setCart={setCart}
-          handleChange={handleChange}
-          handleRemoveItem={handleRemoveItem}
-        />
-        <div className="ml-4">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route
-              path="/book-list"
-              element={<BookListPage handleAddToCart={handleAddToCart} />}
-            />
+    <ThemeConfig>
+      <HashRouter>
+        <div>
+          <MainNavigation
+            cart={cart}
+            setCart={setCart}
+            handleChange={handleChange}
+            handleRemoveItem={handleRemoveItem}
+          />
+          <div className="ml-4">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route
+                path="/book"
+                element={<BookListPage handleAddToCart={handleAddToCart} />}
+              />
 
-            <Route path="/create-book" element={<BookCreate />} />
-            {/* <Route path="/course-history" element={<CourseHistoryPage />} />
-            <Route path="/course-create" element={<BookCreatePage />} /> */}
+              <Route path="/create-book" element={<BookEdit />} />
+              <Route path="/book/:bookID/edit" element={<BookEdit />} />
 
-            <Route path="/signup" element={<FormSignUpPage />} />
-            <Route path="/login" element={<FormLoginPage />} />
-            <Route path="/change-account-info" element={<EditProfile />} />
-            <Route path="/view-my-purchases" element={<MyInvoicePage />} />
-            <Route path="/top-up" element={<TopUp />} />
-            <Route path="/form-edit" element={<FormUserEditPage />} />
+              <Route path="/signup" element={<FormSignUpPage />} />
+              <Route path="/login" element={<FormLoginPage />} />
+              <Route path="/change-account-info" element={<EditProfile />} />
+              <Route path="/view-my-purchases" element={<MyInvoicePage />} />
+              <Route path="/top-up" element={<TopUp />} />
+              <Route path="/form-edit" element={<FormUserEditPage />} />
 
-            <Route path="/my-account" element={<Account />} />
-            <Route
-              path="/book/:bookID"
-              element={<DetailAndRating handleAddToCart={handleAddToCart} />}
-            />
-          </Routes>
+              <Route path="/my-account" element={<Account />} />
+              <Route
+                path="/book/:bookID"
+                element={<DetailAndRating handleAddToCart={handleAddToCart} />}
+              />
+            </Routes>
+          </div>
         </div>
-      </div>
-      <Footer />
-    </HashRouter>
+        <Footer />
+      </HashRouter>
+    </ThemeConfig>
   );
 }
 
