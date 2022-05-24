@@ -20,7 +20,7 @@ import {
 import MultipleSelectCheckmarks from "./MultipleSelectCheckmarks";
 import { Navigate } from "react-router-dom";
 
-const CourseCreate = (props) => {
+const BookCreate = (props) => {
   const bookName = useRef("");
   const bookSlug = useRef("");
   const bookPrice = useRef(0);
@@ -223,4 +223,4 @@ const CourseCreate = (props) => {
     </>
   );
 };
-export default CourseCreate;
+export default BookCreate;
