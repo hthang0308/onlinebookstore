@@ -22,7 +22,7 @@ const MainNavigation = ({ cart, handleChange, handleRemoveItem }) => {
         </Link>
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
           <li className="nav-item">
-            <Link to="/book-list" className="nav-link">
+            <Link to="/book" className="nav-link">
               All Books
             </Link>
           </li>
