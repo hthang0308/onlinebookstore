@@ -5,8 +5,11 @@ import CartItem from '../CartItem';
 import { send } from "@emailjs/browser"
 const CartTotal = (props) => {
     const CartItems = props.CartItems;
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> be832f1e1186e5c8ccca2487b03fe18d52731329
     const [total, setTotal] = useState(0);
     const handlePrice = () => {
         var price = 0;
