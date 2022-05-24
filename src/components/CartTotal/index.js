@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import LocalStorageUtils from "../../utils/LocalStorageUtils"
 import { get, put, post } from "../../utils/ApiCaller"
 import CartItem from '../CartItem';
+import { send } from "@emailjs/browser"
 const CartTotal = (props) => {
     const CartItems = props.CartItems;
-  
+
 
     const [total, setTotal] = useState(0);
     const handlePrice = () => {
@@ -34,7 +35,27 @@ const CartTotal = (props) => {
                 values = [];
                 LocalStorageUtils.setItem("cart", values);
                 alert(res.data.message);
-                window.location.reload();
+                console.log(user.email);
+                console.log(process.env.REACT_APP_EMAILJS_USERID);
+
+                if (user.email) {
+                    var templateParams = {
+                        username: user.username,
+                        user_email: user.email,
+                        total
+                    }
+
+                    return send(
+                        "service_j31p8z4",
+                        "template_qokzxli",
+                        templateParams,
+                        "rsxR374ZabllFHN3x"
+                    ).then(
+                        window.location.reload()
+                    );
+                }
+                else
+                    window.location.reload();
             })
             .catch((err) => alert(err.response.data.message));
 
