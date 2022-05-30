@@ -65,10 +65,10 @@ export default function UserAccount() {
     <Page title="User: Account Settings | Minimal-UI">
       <Container maxWidth={themeStretch ? false : "lg"}>
         <HeaderBreadcrumbs
-          heading="Manage Account"
+          heading="My Account"
           links={[
             { name: "Account", href: "/my-account" },
-            { name: "Manage Account" },
+            { name: "My Account" },
           ]}
         />
 

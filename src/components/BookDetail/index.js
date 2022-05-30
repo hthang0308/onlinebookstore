@@ -16,12 +16,15 @@ import {
   Rating,
 } from "@mui/material";
 import LocalStorageUtils from "../../utils/LocalStorageUtils";
+import Label from "../MyInvoice/Label";
+import { useTheme } from "@emotion/react";
 
 function BookDetail({ handleAddToCart }) {
   const [bookDetail, setBookDetail] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   const { bookID } = useParams();
+  const theme = useTheme();
 
   useEffect(() => {
     // Get Book Detail
@@ -84,6 +87,7 @@ function BookDetail({ handleAddToCart }) {
                   />
                 )}
               </Typography>
+
               <Typography gutterBottom variant="body1" color="text.secondary">
                 {bookDetail.description}
               </Typography>
@@ -96,12 +100,22 @@ function BookDetail({ handleAddToCart }) {
               <Typography variant="body1" color="text.secondary">
                 Thể loại: {bookDetail.categories.join(", ")}
               </Typography>
+              <Typography variant="body1" color="text.secondary">
+                Tình trạng:&nbsp;
+                <Label
+                  variant={theme.palette.mode === "light" ? "ghost" : "filled"}
+                  color={bookDetail.inStock ? "success" : "error"}
+                >
+                  {bookDetail.inStock ? "Còn hàng" : "Hết hàng"}
+                </Label>
+              </Typography>
               <Typography variant="h3" sx={{ my: 2 }} component="div">
-                {bookDetail.price}₫
+                {Number(bookDetail.price).toLocaleString()}₫
               </Typography>
             </CardContent>
+
             <CardActions>
-              {(LocalStorageUtils.getUser()?.isAdmin) ? (
+              {LocalStorageUtils.getUser()?.isAdmin ? (
                 <Button
                   href={"/#/book/" + bookID + "/edit"}
                   color="success"

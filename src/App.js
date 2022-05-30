@@ -2,7 +2,6 @@ import { Routes, Route, HashRouter } from "react-router-dom";
 import MainNavigation from "./components/layout/MainNavigation";
 import BookListPage from "./pages/BookListPage";
 import "./App.css";
-import Account from "./components/Account/account";
 import Footer from "./components/Footer";
 import FormSignUpPage from "./pages/FormSignUpPage";
 import MyInvoicePage from "./pages/MyInvoicePage";
@@ -76,7 +75,7 @@ function App() {
               <Route path="/top-up" element={<TopUp />} />
               <Route path="/form-edit" element={<FormUserEditPage />} />
 
-              <Route path="/my-account" element={<Account />} />
+              {/* <Route path="/my-account" element={<Account />} /> */}
               <Route
                 path="/book/:bookID"
                 element={<DetailAndRating handleAddToCart={handleAddToCart} />}

@@ -5,15 +5,10 @@ import { Link } from "react-router-dom";
 import LocalStorageUtils from "../../utils/LocalStorageUtils";
 import Cart from "../Cart";
 import "./MainNavigation.css";
+import AccountPopover from "../AccountPopover";
 
 const MainNavigation = ({ cart, handleChange, handleRemoveItem }) => {
   const [user, setUser] = useState(LocalStorageUtils.getUser());
-
-  const handleSignOut = () => {
-    LocalStorageUtils.clear();
-    setUser(LocalStorageUtils.getUser());
-  };
-
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -56,15 +51,7 @@ const MainNavigation = ({ cart, handleChange, handleRemoveItem }) => {
           ) : (
             <>
               <li className="nav-item">
-                <div className="nav-link" onClick={handleSignOut}>
-                  {" "}
-                  Sign Out{" "}
-                </div>
-              </li>
-              <li className="nav-item">
-                <Link to="/my-account" className="nav-link">
-                  <Avatar src="https://pbs.twimg.com/media/EYVxlOSXsAExOpX.jpg" />
-                </Link>
+                <AccountPopover />
               </li>
             </>
           )}
