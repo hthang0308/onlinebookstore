@@ -36,8 +36,6 @@ const CartTotal = (props) => {
         values = [];
         LocalStorageUtils.setItem("cart", values);
         alert(res.data.message);
-        console.log(user.email);
-        console.log(process.env.REACT_APP_EMAILJS_USERID);
 
         if (user.email) {
           var templateParams = {
@@ -47,11 +45,14 @@ const CartTotal = (props) => {
           };
 
           return send(
-            "service_j31p8z4",
-            "template_qokzxli",
+            process.env.REACT_APP_EMAILJS_SERVICEID,
+            process.env.REACT_APP_EMAILJS_TEMPLATEID,
             templateParams,
-            "rsxR374ZabllFHN3x"
-          ).then(window.location.reload());
+            process.env.REACT_APP_EMAILJS_USERID
+          ).then(() => {
+            console.log("Send successfully");
+            window.location.reload()
+          });
         } else window.location.reload();
       })
       .catch((err) => alert(err.response.data.message));
