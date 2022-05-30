@@ -38,13 +38,11 @@ export default function ProductDetailsReviewForm({ onClose, ...other }) {
   const ReviewSchema = Yup.object().shape({
     star: Yup.mixed().required("Star is required"),
     comment: Yup.string().required("Review is required"),
-    username: Yup.string().required("Username is required"),
   });
   const formik = useFormik({
     initialValues: {
       star: null,
       comment: "",
-      username: "",
     },
     validationSchema: ReviewSchema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
@@ -60,7 +58,7 @@ export default function ProductDetailsReviewForm({ onClose, ...other }) {
       });
       const obj = {
         book: bookID,
-        rating: values,
+        rating: { ...values, username: LocalStorageUtils.getUser().username },
       };
       put("/api/book/rate", obj)
         .then((res) => {
@@ -69,6 +67,7 @@ export default function ProductDetailsReviewForm({ onClose, ...other }) {
         .catch((err) => {
           console.log(err.response.data.message);
         });
+      onClose();
       resetForm();
       setSubmitting(false);
     },
@@ -118,14 +117,6 @@ export default function ProductDetailsReviewForm({ onClose, ...other }) {
                 {touched.star && errors.star}
               </FormHelperText>
             )}
-
-            <TextField
-              fullWidth
-              label="Username *"
-              {...getFieldProps("username")}
-              error={Boolean(touched.username && errors.username)}
-              helperText={touched.username && errors.username}
-            />
             <TextField
               fullWidth
               multiline

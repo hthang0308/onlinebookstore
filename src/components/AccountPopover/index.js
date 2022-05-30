@@ -5,7 +5,7 @@ import homeFill from "@iconify/icons-eva/home-fill";
 import personFill from "@iconify/icons-eva/person-fill";
 import carfill from "@iconify/icons-eva/car-fill";
 import coinBagSolid from "@iconify/icons-clarity/coin-bag-solid";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 // material
 import { alpha } from "@mui/material/styles";
 import { Button, Box, Divider, MenuItem, Typography } from "@mui/material";
@@ -44,7 +44,6 @@ const MENU_OPTIONS = [
 
 export default function AccountPopover() {
   const anchorRef = useRef(null);
-  const navigate = useNavigate();
   // const { enqueueSnackbar } = useSnackbar();
   const isMountedRef = useIsMountedRef();
   const [open, setOpen] = useState(false);
@@ -59,7 +58,7 @@ export default function AccountPopover() {
   const handleLogout = async () => {
     try {
       LocalStorageUtils.clear();
-      navigate("/");
+      window.location.reload();
       if (isMountedRef.current) {
         handleClose();
       }

@@ -6,6 +6,7 @@ import { Divider, Collapse } from "@mui/material";
 import ProductDetailsReviewForm from "./ProductDetailsReviewForm";
 import ProductDetailsReviewList from "./ProductDetailsReviewList";
 import ProductDetailsReviewOverview from "./ProductDetailsReviewOverview";
+import LocalStorageUtils from "../../../utils/LocalStorageUtils";
 
 // ----------------------------------------------------------------------
 
@@ -17,7 +18,10 @@ export default function ProductDetailsReview({ product }) {
   const [reviewBox, setReviewBox] = useState(false);
 
   const handleOpenReviewBox = () => {
-    setReviewBox((prev) => !prev);
+    if (LocalStorageUtils.getUser()) setReviewBox((prev) => !prev);
+    else {
+      alert("You must be logged in to review");
+    }
   };
 
   const handleCloseReviewBox = () => {

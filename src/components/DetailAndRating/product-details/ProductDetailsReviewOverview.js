@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 // utils
 import { fShortenNumber } from "./formatNumber";
+import LocalStorageUtils from "../../../utils/LocalStorageUtils";
 
 // ----------------------------------------------------------------------
 
@@ -134,7 +135,18 @@ export default function ProductDetailsReviewOverview({ product, onOpen }) {
       </GridStyle>
 
       <GridStyle item xs={12} md={4}>
-        <ScrollLink to="move_add_review" spy smooth offset={-200}>
+        {LocalStorageUtils.getUser() ? (
+          <ScrollLink to="move_add_review" spy smooth offset={-200}>
+            <Button
+              size="large"
+              onClick={onOpen}
+              variant="outlined"
+              startIcon={<Icon icon={edit2Fill} />}
+            >
+              Write your review
+            </Button>
+          </ScrollLink>
+        ) : (
           <Button
             size="large"
             onClick={onOpen}
@@ -143,7 +155,7 @@ export default function ProductDetailsReviewOverview({ product, onOpen }) {
           >
             Write your review
           </Button>
-        </ScrollLink>
+        )}
       </GridStyle>
     </Grid>
   );

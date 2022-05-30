@@ -15,13 +15,36 @@ import EditProfile from "./components/EditProfile/UserAccount";
 import DetailAndRating from "./components/DetailAndRating";
 
 import HomePage from "./pages/HomePage";
-import { useState } from "react";
+import React, { useState } from "react";
 import TopUp from "./components/TopUp";
 
 import ThemeConfig from "./theme";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function App() {
   const existCart = LocalStorageUtils.getItem("cart");
+  const [snackbar, setSnackbar] = useState({
+    isOpen: false,
+    msg: "",
+    type: "",
+  });
+
+  const handleShowSnackbar = (isOpen, msg = "", type = "") => {
+    setSnackbar({ isOpen, msg, type });
+  };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSnackbar({ ...snackbar, isOpen: false });
+  };
 
   const [cart, setCart] = useState(existCart ? existCart : []);
 
@@ -32,6 +55,7 @@ function App() {
     } else {
       setCart([...cart, { book: item, quantity: 1 }]);
     }
+    handleShowSnackbar(true, "Add To Cart Successfully!!!", "success");
   };
 
   const handleChange = (item, d) => {
@@ -85,6 +109,23 @@ function App() {
         </div>
         <Footer />
       </HashRouter>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        open={snackbar.isOpen}
+        onClose={handleCloseSnackbar}
+        autoHideDuration={1000}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={snackbar.type}
+          sx={{ width: "100%" }}
+        >
+          {snackbar.msg}
+        </Alert>
+      </Snackbar>
     </ThemeConfig>
   );
 }
