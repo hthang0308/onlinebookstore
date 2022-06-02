@@ -20,6 +20,7 @@ const BookList = ({ handleAddToCart }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [books, setBooks] = useState(null);
   const [category, setCategory] = useState([]);
+  const [title, setTitle] = useState("All Books")
   useEffect(() => {
     setIsLoading(true);
     let listCategory = [];
@@ -65,8 +66,8 @@ const BookList = ({ handleAddToCart }) => {
       setDataContent(listBook);
       console.log(name);
     }
+    setTitle(name);
   }
-
 
   return (
     <Container maxWidth="xl">
@@ -84,14 +85,12 @@ const BookList = ({ handleAddToCart }) => {
           <SearchIcon />
         </Button>
       </Box>
-      <div>
+      <div className="">
         <div>
-          <FilterTreeView categories={category} filterHandler={filterHandler}>
-
-          </FilterTreeView>
+          <FilterTreeView categories={category} filterHandler={filterHandler} />
         </div>
 
-        <div className="title z ">All Books</div>
+        <div className="title z ">{title}</div>
         {!isLoading && dataContent.length > 0 && (
           <Pagination
             data={dataContent.map((dataDetail) => {
@@ -110,7 +109,7 @@ const BookList = ({ handleAddToCart }) => {
             <CircularProgress className="m-2" />
           </Box>
         ) : (
-          dataContent.length === 0 && <div className="ml-2">No course!</div>
+          dataContent.length === 0 && <div className="ml-2">empty!</div>
         )}
       </div>
     </Container>
