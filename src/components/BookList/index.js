@@ -1,5 +1,6 @@
 import "./index.css";
 import { useState, useEffect } from "react";
+
 import BookCard from "../BookCard";
 import { get } from "../../utils/ApiCaller";
 import {
@@ -11,17 +12,29 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Pagination from "../Pagination";
+import FilterTreeView from "../FilterTreeView";
 
 const BookList = ({ handleAddToCart }) => {
   const [searchText, setSearchText] = useState("");
   const [dataContent, setDataContent] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [books, setBooks] = useState(null);
+  const [category, setCategory] = useState([]);
   useEffect(() => {
     setIsLoading(true);
+    let listCategory = [];
     get("/api/book/search?perPage=100")
       .then((res) => {
+        const items = res.data.content.items;
         setDataContent(res.data.content.items);
+        for (let item of items) {
+          for (let category of item.categories) {
+            listCategory.push(category);
+          }
+        }
+        listCategory = Array.from(new Set(listCategory));
+        setCategory(listCategory);
+        setBooks(items);
       })
       .then(() => setIsLoading(false));
   }, []);
@@ -34,10 +47,26 @@ const BookList = ({ handleAddToCart }) => {
       })
       .then(() => setIsLoading(false));
   };
-
   const searchTextChangeHandler = (event) => {
     setSearchText(event.target.value);
   };
+  const filterHandler = (type, name) => {
+    if (type == "all") {
+      setDataContent(books);
+    }
+    if (type == "category") {
+      let listBook = []
+      for (let book of books) {
+        if (book.categories.includes(name)) {
+          listBook.push(book);
+        };
+
+      }
+      setDataContent(listBook);
+      console.log(name);
+    }
+  }
+
 
   return (
     <Container maxWidth="xl">
@@ -56,7 +85,13 @@ const BookList = ({ handleAddToCart }) => {
         </Button>
       </Box>
       <div>
-        <div className="title m-2 ml-4">All Books</div>
+        <div>
+          <FilterTreeView categories={category} filterHandler={filterHandler}>
+
+          </FilterTreeView>
+        </div>
+
+        <div className="title z ">All Books</div>
         {!isLoading && dataContent.length > 0 && (
           <Pagination
             data={dataContent.map((dataDetail) => {
