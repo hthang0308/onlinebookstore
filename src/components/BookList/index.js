@@ -1,6 +1,6 @@
 import "./index.css";
 import { useState, useEffect } from "react";
-
+import Grid from '@mui/material/Grid';
 import BookCard from "../BookCard";
 import { get } from "../../utils/ApiCaller";
 import {
@@ -20,6 +20,7 @@ const BookList = ({ handleAddToCart }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [books, setBooks] = useState(null);
   const [category, setCategory] = useState([]);
+  const [title, setTitle] = useState("All Books")
   useEffect(() => {
     setIsLoading(true);
     let listCategory = [];
@@ -43,7 +44,9 @@ const BookList = ({ handleAddToCart }) => {
     setIsLoading(true);
     get("/api/book/search?q=" + searchText)
       .then((res) => {
-        setDataContent(res.data.content.items);
+        const searchItems = res.data.content.items;
+        setTitle("ALl Books")
+        setDataContent(searchItems);
       })
       .then(() => setIsLoading(false));
   };
@@ -65,8 +68,8 @@ const BookList = ({ handleAddToCart }) => {
       setDataContent(listBook);
       console.log(name);
     }
+    setTitle(name);
   }
-
 
   return (
     <Container maxWidth="xl">
@@ -84,35 +87,38 @@ const BookList = ({ handleAddToCart }) => {
           <SearchIcon />
         </Button>
       </Box>
-      <div>
-        <div>
-          <FilterTreeView categories={category} filterHandler={filterHandler}>
+      <div className="title z ">{title}</div>
 
-          </FilterTreeView>
-        </div>
 
-        <div className="title z ">All Books</div>
-        {!isLoading && dataContent.length > 0 && (
-          <Pagination
-            data={dataContent.map((dataDetail) => {
-              return (
-                <BookCard
-                  handleAddToCart={handleAddToCart}
-                  data={dataDetail}
-                  key={dataDetail._id}
-                />
-              );
-            })}
-          />
-        )}
-        {isLoading ? (
-          <Box display="flex" justifyContent="center" alignItems="center">
-            <CircularProgress className="m-2" />
-          </Box>
-        ) : (
-          dataContent.length === 0 && <div className="ml-2">No course!</div>
-        )}
-      </div>
+      {!isLoading && dataContent.length > 0 && (
+        <Grid container spacing={2}>
+          <Grid item xs={2}>
+            <FilterTreeView categories={category} filterHandler={filterHandler} />
+          </Grid>
+
+          <Grid item xs={10}>
+            <Pagination
+              data={dataContent.map((dataDetail) => {
+                return (
+                  <BookCard
+                    handleAddToCart={handleAddToCart}
+                    data={dataDetail}
+                    key={dataDetail._id}
+                  />
+                );
+              })}
+            />
+          </Grid>
+        </Grid>
+      )}
+
+      {isLoading ? (
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <CircularProgress className="m-2" />
+        </Box>
+      ) : (
+        dataContent.length === 0 && <div className="ml-2">Không tìm thấy sách!</div>
+      )}
     </Container>
   );
 };
