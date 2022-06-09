@@ -7,12 +7,15 @@ import { get } from "../../utils/ApiCaller";
 import BookDetail from "../BookDetail";
 import { ProductDetailsReview } from "./product-details";
 import { useParams } from "react-router-dom";
+import ReccomandTab from "../ReccomendTab";
 // ----------------------------------------------------------------------
 
 export default function EcommerceProductDetails({ handleAddToCart }) {
   const { bookID } = useParams();
   const [value, setValue] = useState("1");
   const [bookDetail, setBookDetail] = useState();
+  const [books, setBooks] = useState([]);
+
   useEffect(() => {
     // Get Book Detail
     get("/api/book/detail?book=" + bookID)
@@ -24,6 +27,14 @@ export default function EcommerceProductDetails({ handleAddToCart }) {
         console.log(bookID);
         console.log(err);
       });
+    //getListBook 
+    get("/api/book/search?perPage=100")
+      .then((res) => {
+        const items = res.data.content.items;
+        setBooks(items);
+      });
+    setValue("1")
+
   }, [bookID]);
   const handleChangeTab = (event, newValue) => {
     setValue(newValue);
@@ -42,6 +53,7 @@ export default function EcommerceProductDetails({ handleAddToCart }) {
                   label={`Review (${bookDetail.rating.length})`}
                   sx={{ "& .MuiTab-wrapper": { whiteSpace: "nowrap" } }}
                 />
+                <Tab disableRipple value="3" label="Có thể bạn sẽ thích" />
               </TabList>
             </Box>
 
@@ -54,6 +66,9 @@ export default function EcommerceProductDetails({ handleAddToCart }) {
             </TabPanel>
             <TabPanel value="2">
               <ProductDetailsReview product={bookDetail} />
+            </TabPanel>
+            <TabPanel value="3">
+              <ReccomandTab product={bookDetail} books={books} ></ReccomandTab>
             </TabPanel>
           </TabContext>
         </Card>

@@ -13,9 +13,9 @@ export default function FilterTreeView(props) {
             defaultCollapseIcon={<ExpandMoreIcon />}
             defaultExpandIcon={<ChevronRightIcon />}
             defaultEndIcon={false}
-            sx={{ height: 240, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
+            sx={{ height: '100%', flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
         >
-            <StyledTreeItem nodeId="1" labelText="All book" labelIcon={Label} onClick={() => props.filterHandler("all", 'All Books')} />
+            <StyledTreeItem nodeId="1" labelText="All Books" labelIcon={Label} onClick={() => props.filterHandler("all", 'All Books')} />
 
             <StyledTreeItem nodeId="2" labelText="Category" labelIcon={Label}>
                 {categories.length > 0 && categories.map((item, index) => (
