@@ -26,7 +26,7 @@ class Pagination extends React.Component {
     const currentTodos = todos.slice(indexOfFirstTodo, indexOfLastTodo);
 
     const renderTodos = currentTodos.map((todo, index) => {
-      return <div key={index}>{todo}</div>;
+      return <div key={index} style={{ display: "inline-block", width: "33%" }}>{todo}</div>;
     });
 
     // Logic for displaying page numbers
@@ -51,8 +51,8 @@ class Pagination extends React.Component {
 
     return (
       <>
-        <div>{renderTodos} </div>
-        <div className="clrfloat"></div>
+        <div className="clrfloat" display="flex">{renderTodos}</div>
+        {/* <div className="clrfloat"></div> */}
         <nav aria-label="Nav">
           <ul className="pagination justify-content-center">
             {renderPageNumbers}

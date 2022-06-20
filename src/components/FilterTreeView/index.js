@@ -10,6 +10,7 @@ export default function FilterTreeView(props) {
             aria-label="file system navigator"
             defaultCollapseIcon={<ExpandMoreIcon />}
             defaultExpandIcon={<ChevronRightIcon />}
+            defaultEndIcon={false}
             sx={{ height: 240, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
         >
             <TreeItem nodeId="1" label="All book" onClick={() => props.filterHandler("all", '')}>
@@ -17,8 +18,8 @@ export default function FilterTreeView(props) {
 
             <TreeItem nodeId="2" label="Category">
                 {props.categories.length > 0 &&
-                    props.categories.map((item) => (
-                        <TreeItem label={item} onClick={() => props.filterHandler("category", item)}></TreeItem>
+                    props.categories.map((item, index) => (
+                        <TreeItem nodeId={"" + (index + 3)} key={index} label={item} onClick={() => props.filterHandler("category", item)}></TreeItem>
                     ))}
             </TreeItem>
         </TreeView>

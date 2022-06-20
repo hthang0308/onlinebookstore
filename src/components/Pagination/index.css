@@ -1,8 +1,10 @@
 li {
   display: inline;
 }
-.clrfloat {
+.clrfloat::after {
+  content: "";
   clear: both;
+  display: table;
 }
 .page-item {
   cursor: pointer !important;
